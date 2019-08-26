@@ -2,9 +2,15 @@ package io.andersori.led.api.config;
 
 import java.util.Optional;
 
-@FunctionalInterface
-public interface Auditor {
+import org.springframework.stereotype.Component;
+
+@Component
+public class Auditor {
 	
-	Optional<String> getCurrentAuditor();
+	private static final String auditor = "led_auditor";
+	
+	public Optional<String> getCurrentAuditor() {
+		return Optional.of(auditor);
+	}
 	
 }
