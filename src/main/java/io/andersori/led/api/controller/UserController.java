@@ -18,7 +18,6 @@ public class UserController {
 	public UserController() {
 		
 		Spark.get("/users", (req, res) -> {
-			res.type("application/json;charset=utf-8");
 			return userService.getUsers();
 		}, new JsonTransformer());
 		

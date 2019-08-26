@@ -28,9 +28,8 @@ public class App {
 	}
 
 	private static void cad(ApplicationContext context){
-		//UserServiceIm
-
 		UserServiceIn ser = context.getBean(UserServiceIm.class);
+		
 		UserLedBean bean = new UserLedBean();
 		bean.setName("Anderson");
 		bean.setPassword("123");
