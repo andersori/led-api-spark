@@ -17,8 +17,8 @@ import org.springframework.stereotype.Repository;
 public abstract class DAOHibernate<T> implements DAO<T> {
 
 	@Autowired
-	@Qualifier("sessionFactory")
-	private SessionFactory sessionFactory;
+	@Qualifier("SessionFactory")
+	protected SessionFactory sessionFactory;
 	
 	private final Class<T> type;
 	
