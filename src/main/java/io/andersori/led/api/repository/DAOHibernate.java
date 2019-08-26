@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -34,6 +35,10 @@ public abstract class DAOHibernate<T> implements DAO<T> {
 		try {
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<T> criteria = builder.createQuery(type);
+			
+			Root<T> root = criteria.from(type);
+			
+			criteria.select(root);
 			
 			List<T> result = session.createQuery(criteria).getResultList();
 			
