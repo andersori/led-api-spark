@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import io.andersori.led.api.entity.UserLed;
 
 @Configuration
-@ComponentScan(basePackages = "io.andersori.led.api")
+@ComponentScan("io.andersori.led.api")
 public class LedConfiguration {
 				
 	@Bean(name = "SessionFactory")

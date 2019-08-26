@@ -15,7 +15,7 @@ import io.andersori.led.api.repository.UserRepositoryIn;
 public class UserServiceIm implements UserServiceIn {
 	
 	@Autowired
-	@Qualifier("UserReposotoryIm")
+	@Qualifier("UserRepositoryIm")
 	private UserRepositoryIn userRepository;
 
 	@Override
@@ -25,7 +25,6 @@ public class UserServiceIm implements UserServiceIn {
 
 	@Override
 	public List<UserLedBean> getUsers() {
-		
 		return userRepository.findAll()
 				.stream()
 				.map(u -> {
@@ -34,7 +33,6 @@ public class UserServiceIm implements UserServiceIn {
 					return bean;
 					})
 				.collect(Collectors.toList());
-		
 	}
 	
 }

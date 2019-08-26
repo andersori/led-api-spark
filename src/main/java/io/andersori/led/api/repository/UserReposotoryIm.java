@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import io.andersori.led.api.entity.UserLed;
 
-@Repository("UserReposotoryIm")
+@Repository("UserRepositoryIm")
 public class UserReposotoryIm extends DAOHibernate<UserLed> implements UserRepositoryIn {
 
 	protected UserReposotoryIm(Class<UserLed> type) {
