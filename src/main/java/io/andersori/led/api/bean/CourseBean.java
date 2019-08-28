@@ -3,8 +3,11 @@ package io.andersori.led.api.bean;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-public class CourseBean implements BeanLed<CourseBean> {
+import io.andersori.led.api.entity.Course;
+
+public class CourseBean implements BeanLed<Course> {
 
     private Long id;
     private String name;
@@ -48,12 +51,22 @@ public class CourseBean implements BeanLed<CourseBean> {
     }
 
     @Override
-    public void toBean(Optional<CourseBean> entity) {
+    public void toBean(Optional<Course> entity) {
+        if(entity.isPresent()){
+            Course c = entity.get();
+            c.setId(this.getId());
+            c.setName(this.getName());
+            c.setSchoolClasses(this.getSchoolClasses()
+                                    .stream()
+                                    .map(u -> u.toEntity()).collect(Collectors.toList()));
 
+                                    c.setStudents(this.getStudents());
+
+        }
     }
 
     @Override
-    public CourseBean toEntity() {
+    public Course toEntity() {
         return null;
 	} 
     

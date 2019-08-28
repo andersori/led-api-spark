@@ -36,19 +36,36 @@ public class Course extends AuditModel {
     }
 
     public Long getId() {
-      return id;
+        return this.id;
     }
 
     public void setId(Long id) {
-      this.id = id;
+        this.id = id;
     }
 
     public String getName() {
-      return name;
+        return this.name;
     }
 
     public void setName(String name) {
-      this.name = name;
+        this.name = name;
     }
+
+    public List<Student> getStudents() {
+        return this.students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public List<SchoolClass> getSchoolClasses() {
+        return this.schoolClasses;
+    }
+
+    public void setSchoolClasses(List<SchoolClass> schoolClasses) {
+        this.schoolClasses = schoolClasses;
+    }
+    
      
 }

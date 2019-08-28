@@ -72,7 +72,6 @@ public class UserLedBean implements BeanLed<UserLed> {
 
 	@Override
 	public void toBean(Optional<UserLed> entity) {
-		
 		if(entity.isPresent()) {
 			UserLed e = entity.get();
 			this.setId(e.getId());
@@ -82,7 +81,6 @@ public class UserLedBean implements BeanLed<UserLed> {
 			this.setRoles(e.getRoles());
 			this.setUsername(e.getUsername());
 		}
-		
 	}
 
 	@Override
