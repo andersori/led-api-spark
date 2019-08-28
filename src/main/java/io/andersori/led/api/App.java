@@ -8,6 +8,7 @@ import io.andersori.led.api.bean.UserLedBean;
 import io.andersori.led.api.controller.UserController;
 import io.andersori.led.api.service.UserServiceIm;
 import io.andersori.led.api.service.UserServiceIn;
+import io.andersori.led.api.util.BeanUtil;
 
 public class App {
 	
@@ -15,7 +16,7 @@ public class App {
 		
 		ApplicationContext context = new AnnotationConfigApplicationContext(LedConfiguration.class);
 		
-		cad(context);
+		userRegister();
 
 		//Routers
 		new UserController();
@@ -27,8 +28,8 @@ public class App {
 		
 	}
 
-	private static void cad(ApplicationContext context){
-		UserServiceIn ser = context.getBean(UserServiceIm.class);
+	private static void userRegister() {
+		UserServiceIn ser = BeanUtil.getBean(UserServiceIm.class);
 		
 		UserLedBean bean = new UserLedBean();
 		bean.setName("Anderson");
@@ -36,5 +37,9 @@ public class App {
 		bean.setUsername("andersori");
 
 		ser.register(bean);
+	}
+
+	private static void marathonRegister() { 
+
 	}
 }
