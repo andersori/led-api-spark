@@ -16,19 +16,19 @@ public abstract class AuditModel {
 	@NotNull
 	@Column(name = "created_by", nullable = false, updatable = false)
 	private String createdBy;
-	
+
 	@NotNull
 	@Column(name = "last_modifield_by", nullable = false)
 	private String lastModifieldBy;
-	
+
 	@NotNull
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private LocalDateTime createdAt;
-	
+
 	@NotNull
 	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updatedAt;
-	
+
 	public AuditModel() {
 		
 	}

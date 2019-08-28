@@ -24,6 +24,7 @@ public class UserLed extends AuditModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_led_id")
 	private Long id;
 
 	@Column(name = "name", nullable = false, length = 250)

@@ -13,6 +13,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import io.andersori.led.api.entity.Course;
+import io.andersori.led.api.entity.Marathon;
+import io.andersori.led.api.entity.ParticipantTeam;
+import io.andersori.led.api.entity.SchoolClass;
+import io.andersori.led.api.entity.Student;
+import io.andersori.led.api.entity.Team;
 import io.andersori.led.api.entity.UserLed;
 
 @Configuration
@@ -41,7 +47,13 @@ public class LedConfiguration {
 	        StandardServiceRegistry registry = registryBuilder.build();
 	
 	        MetadataSources sources = new MetadataSources(registry)
-	                                        .addAnnotatedClass(UserLed.class);
+											.addAnnotatedClass(Course.class)
+											.addAnnotatedClass(Marathon.class)
+											.addAnnotatedClass(ParticipantTeam.class)
+											.addAnnotatedClass(SchoolClass.class)
+											.addAnnotatedClass(Student.class)
+											.addAnnotatedClass(Team.class)
+											.addAnnotatedClass(UserLed.class);
 	                                        
 	        Metadata metadata = sources.getMetadataBuilder().build();
 	        
