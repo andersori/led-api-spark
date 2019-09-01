@@ -1,17 +1,20 @@
 package io.andersori.led.api.bean;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import io.andersori.led.api.entity.Semester;
+import io.andersori.led.api.entity.Marathon;
+import io.andersori.led.api.entity.ParticipantTeam;
 
-public class MarathonBean implements BeanLed<MarathonBean> {
+public class MarathonBean implements BeanLed<Marathon> {
 
     private Long id;
-    private Semester semester;
+    private SemesterBean semester;
     private LocalDate date;
-    private List<ParticipantTeamBean> participants;
+    private List<ParticipantTeamBean> participants = new ArrayList<>();
 
     public MarathonBean() {
         
@@ -25,11 +28,11 @@ public class MarathonBean implements BeanLed<MarathonBean> {
         this.id = id;
     }
 
-    public Semester getSemester() {
+    public SemesterBean getSemester() {
         return this.semester;
     }
 
-    public void setSemester(Semester semester) {
+    public void setSemester(SemesterBean semester) {
         this.semester = semester;
     }
 
@@ -49,16 +52,41 @@ public class MarathonBean implements BeanLed<MarathonBean> {
         this.participants = participants;
     }
 
-
     @Override
-    public void toBean(Optional<MarathonBean> entity) {
+    public void toBean(Optional<Marathon> entity) {
+        if(entity.isPresent()){
+            Marathon e = entity.get();
+            this.setId(e.getId());
+            this.setDate(e.getDate());
 
+            SemesterBean sBean = new SemesterBean();
+            sBean.toBean(Optional.of(e.getSemester()));
+            this.setSemester(sBean);
+
+            this.setParticipants(e.getParticipants()
+            .stream()
+            .map((ParticipantTeam p) -> {
+                ParticipantTeamBean bean = new ParticipantTeamBean();
+                bean.toBean(Optional.of(p));
+                return bean;
+            })
+            .collect(Collectors.toList()));
+        }
     }
 
     @Override
-    public MarathonBean toEntity() {
-		return null;
+    public Marathon toEntity() {
+        Marathon entity = new Marathon();
+        entity.setId(this.getId());
+        entity.setDate(this.getDate());
+        entity.setSemester(this.getSemester().toEntity());
+
+        entity.setParticipants(this.getParticipants()
+        .stream()
+        .map((ParticipantTeamBean p) -> p.toEntity())
+        .collect(Collectors.toList()));
+        
+        return entity;
 	}
 
-    
 }

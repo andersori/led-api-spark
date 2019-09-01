@@ -4,8 +4,9 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import io.andersori.led.api.entity.House;
+import io.andersori.led.api.entity.ParticipantTeam;
 
-public class ParticipantTeamBean implements BeanLed<ParticipantTeamBean> {
+public class ParticipantTeamBean implements BeanLed<ParticipantTeam> {
 
     private Long id;
     private TeamBean team;
@@ -67,13 +68,34 @@ public class ParticipantTeamBean implements BeanLed<ParticipantTeamBean> {
     }
 
     @Override
-    public void toBean(Optional<ParticipantTeamBean> entity) {
+    public void toBean(Optional<ParticipantTeam> entity) {
+        if(entity.isPresent()){
+            ParticipantTeam e = entity.get();
+            this.setId(e.getId());
+            this.setEntryDate(e.getEntryDate());
+            this.setScore(e.getScore());
+            this.setHouse(e.getHouse());
 
+            TeamBean team = new TeamBean();
+            team.toBean(Optional.of(e.getTeam()));
+            this.setTeam(team);
+
+            MarathonBean marathon = new MarathonBean();
+            marathon.toBean(Optional.of(e.getMarathon()));
+            this.setMarathon(marathon);
+        }
     }
 
     @Override
-    public ParticipantTeamBean toEntity() {
-		return null;
+    public ParticipantTeam toEntity() {
+        ParticipantTeam entity = new ParticipantTeam();
+        entity.setId(this.getId());
+        entity.setEntryDate(this.getEntryDate());
+        entity.setScore(this.getScore());
+        entity.setHouse(this.getHouse());
+        entity.setTeam(this.getTeam().toEntity());
+        entity.setMarathon(this.getMarathon().toEntity());
+        return entity;
 	}
 
 }

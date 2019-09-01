@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import io.andersori.led.api.entity.Course;
+import io.andersori.led.api.entity.SchoolClass;
+import io.andersori.led.api.entity.Student;
 
 public class CourseBean implements BeanLed<Course> {
 
@@ -54,20 +56,46 @@ public class CourseBean implements BeanLed<Course> {
     public void toBean(Optional<Course> entity) {
         if(entity.isPresent()){
             Course c = entity.get();
-            c.setId(this.getId());
-            c.setName(this.getName());
-            c.setSchoolClasses(this.getSchoolClasses()
-                                    .stream()
-                                    .map(u -> u.toEntity()).collect(Collectors.toList()));
+            this.setId(c.getId());
+            this.setName(c.getName());
 
-                                    c.setStudents(this.getStudents());
+            this.setSchoolClasses(c.getSchoolClasses()
+            .stream()
+            .map((SchoolClass s) -> {
+                SchoolClassBean bean = new SchoolClassBean();
+                bean.toBean(Optional.of(s));
+                return bean;
+            })
+            .collect(Collectors.toList()));
 
+            this.setStudents(c.getStudents()
+            .stream()
+            .map((Student s) -> {
+                StudentBean bean = new StudentBean();
+                bean.toBean(Optional.of(s));
+                return bean;
+            })
+            .collect(Collectors.toList()));
         }
     }
 
     @Override
     public Course toEntity() {
-        return null;
+        Course entity = new Course();
+        entity.setId(this.getId());
+        entity.setName(this.getName());
+
+        entity.setSchoolClasses(this.getSchoolClasses()
+        .stream()
+        .map((SchoolClassBean s) -> s.toEntity())
+        .collect(Collectors.toList()));
+
+        entity.setStudents(this.getStudents()
+        .stream()
+        .map((StudentBean s) -> s.toEntity())
+        .collect(Collectors.toList()));
+
+        return entity;
 	} 
     
 }

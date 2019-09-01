@@ -69,4 +69,12 @@ public class Student extends AuditModel {
         this.course = course;
     }
 
+    public SchoolClass getSchoolClass() {
+        return this.schoolClass;
+    }
+
+    public void setSchoolClass(SchoolClass schoolClass) {
+        this.schoolClass = schoolClass;
+    }
+
 }

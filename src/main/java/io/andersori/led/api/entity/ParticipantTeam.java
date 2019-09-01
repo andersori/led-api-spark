@@ -81,4 +81,12 @@ public class ParticipantTeam extends AuditModel {
         this.house = house;
     }
 
+    public Marathon getMarathon() {
+        return this.marathon;
+    }
+
+    public void setMarathon(Marathon marathon) {
+        this.marathon = marathon;
+    }
+
 }

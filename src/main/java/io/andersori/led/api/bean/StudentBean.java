@@ -2,7 +2,9 @@ package io.andersori.led.api.bean;
 
 import java.util.Optional;
 
-public class StudentBean implements BeanLed<StudentBean> {
+import io.andersori.led.api.entity.Student;
+
+public class StudentBean implements BeanLed<Student> {
 
     private Long id;
     private String name;
@@ -55,13 +57,32 @@ public class StudentBean implements BeanLed<StudentBean> {
     }
     
     @Override
-    public void toBean(Optional<StudentBean> entity) {
+    public void toBean(Optional<Student> entity) {
+        if(entity.isEmpty()){
+            Student e = entity.get();
+            this.setId(e.getId());
+            this.setName(e.getName());
+            this.setRegistration(e.getRegistration());
 
+            CourseBean couse = new CourseBean();
+            couse.toBean(Optional.of(e.getCourse()));
+            this.setCourse(course);
+
+            SchoolClassBean schoolClass = new SchoolClassBean();
+            schoolClass.toBean(Optional.of(e.getSchoolClass()));
+            this.setSchoolClass(schoolClass);
+        }
     }
 
     @Override
-    public StudentBean toEntity() {
-      return null;
+    public Student toEntity() {
+        Student entity = new Student();
+        entity.setId(this.getId());
+        entity.setName(this.getName());
+        entity.setRegistration(this.getRegistration());
+        entity.setCourse(this.getCourse().toEntity());
+        entity.setSchoolClass(this.getSchoolClass().toEntity());
+        return entity;
     }
     
 }

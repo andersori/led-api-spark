@@ -3,15 +3,17 @@ package io.andersori.led.api.bean;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import io.andersori.led.api.entity.Semester;
+import io.andersori.led.api.entity.SchoolClass;
+import io.andersori.led.api.entity.Student;
 
-public class SchoolClassBean implements BeanLed<SchoolClassBean> {
+public class SchoolClassBean implements BeanLed<SchoolClass> {
 
     private Long id;
     private String name;
     private String codClass;
-    private Semester semester;
+    private SemesterBean semester;
     private CourseBean course;
     private List<StudentBean> students = new ArrayList<>();
 
@@ -43,11 +45,11 @@ public class SchoolClassBean implements BeanLed<SchoolClassBean> {
         this.codClass = codClass;
     }
 
-    public Semester getSemester() {
+    public SemesterBean getSemester() {
         return this.semester;
     }
 
-    public void setSemester(Semester semester) {
+    public void setSemester(SemesterBean semester) {
         this.semester = semester;
     }
 
@@ -68,13 +70,47 @@ public class SchoolClassBean implements BeanLed<SchoolClassBean> {
     }
 
     @Override
-    public void toBean(Optional<SchoolClassBean> entity) {
+    public void toBean(Optional<SchoolClass> entity) {
+        if(entity.isEmpty()){
+            SchoolClass e = entity.get();
+            this.setId(e.getId());
+            this.setName(e.getName());
+            this.setCodClass(e.getCodClass());
+            
+            SemesterBean semester = new SemesterBean();
+            semester.toBean(Optional.of(e.getSemester()));
+            this.setSemester(semester);
 
+            CourseBean couse = new CourseBean();
+            couse.toBean(Optional.of(e.getCourse()));
+            this.setCourse(course);;
+
+            this.setStudents(e.getStudents()
+            .stream()
+            .map((Student s) -> {
+                StudentBean bean = new StudentBean();
+                bean.toBean(Optional.of(s));
+                return bean;
+            })
+            .collect(Collectors.toList()));
+        }
     }
 
     @Override
-    public SchoolClassBean toEntity() {
-		return null;
+    public SchoolClass toEntity() {
+        SchoolClass entity = new SchoolClass();
+        entity.setId(this.getId());
+        entity.setName(this.getName());
+        entity.setCodClass(this.getCodClass());
+        entity.setSemester(this.getSemester().toEntity());
+        entity.setCourse(this.getCourse().toEntity());
+
+        entity.setStudents(this.getStudents()
+        .stream()
+        .map((StudentBean s) -> s.toEntity())
+        .collect(Collectors.toList()));
+
+        return entity;
 	}
 
 }
