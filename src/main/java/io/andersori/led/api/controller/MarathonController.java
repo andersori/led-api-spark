@@ -12,7 +12,7 @@ import spark.Spark;
 public class MarathonController {
 
     @Autowired
-    @Qualifier("MarathonServiceIn")
+    @Qualifier("MarathonServiceIm")
     private MarathonServiceIn marathonService;
 
     public MarathonController() {

@@ -27,13 +27,13 @@ public class UserServiceIm implements UserServiceIn {
 	@Override
 	public List<UserLedBean> getUsers() {
 		return userRepository.findAll()
-				.stream()
-				.map((UserLed u) -> {
-					UserLedBean bean = new UserLedBean();
-					bean.toBean(Optional.of(u));
-					return bean;
-				})
-				.collect(Collectors.toList());
+		.stream()
+		.map((UserLed u) -> {
+			UserLedBean bean = new UserLedBean();
+			bean.toBean(Optional.of(u));
+			return bean;
+		})
+		.collect(Collectors.toList());
 	}
 	
 }

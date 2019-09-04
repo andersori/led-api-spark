@@ -12,7 +12,7 @@ import spark.Spark;
 public class ParticipantTeamController {
 
     @Autowired
-    @Qualifier("ParticipantTeamServiceIn")
+    @Qualifier("ParticipantTeamServiceIm")
     private ParticipantTeamServiceIn participantTeamService;
 
     public ParticipantTeamController() {

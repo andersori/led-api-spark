@@ -12,7 +12,7 @@ import spark.Spark;
 public class SemesterController {
 
     @Autowired
-    @Qualifier("SemesterServiceIn")
+    @Qualifier("SemesterServiceIm")
     private SemesterServiceIn semesterService;
 
     public SemesterController() {

@@ -12,7 +12,7 @@ import spark.Spark;
 public class CourseController {
 
     @Autowired
-    @Qualifier("CourseServiceIn")
+    @Qualifier("CourseServiceIm")
     private CourseServiceIn courseService;
 
     public CourseController() {
