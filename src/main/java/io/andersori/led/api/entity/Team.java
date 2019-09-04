@@ -1,5 +1,6 @@
 package io.andersori.led.api.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "team")
 public class Team extends AuditModel {
@@ -28,16 +32,17 @@ public class Team extends AuditModel {
     @JoinColumn(name = "user_id", referencedColumnName = "user_led_id")
     private UserLed user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(
         name = "team_student",
         joinColumns = { @JoinColumn(name = "team_id") },
         inverseJoinColumns = { @JoinColumn(name = "student_id") }
     )
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "team")
-    private List<ParticipantTeam> participations;
+    private List<ParticipantTeam> participations = new ArrayList<>();
 
     public Team() {
         

@@ -31,7 +31,7 @@ public class SemesterBean implements BeanLed<Semester> {
 
     @Override
     public void toBean(Optional<Semester> entity) {
-        if(entity.isEmpty()){
+        if(entity.isPresent()){
             Semester e = entity.get();
             this.setNumberSemester(e.getNumberSemester());
             this.setYear(e.getYear());

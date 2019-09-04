@@ -35,5 +35,18 @@ public class UserServiceIm implements UserServiceIn {
 		})
 		.collect(Collectors.toList());
 	}
+
+	@Override
+	public Optional<UserLedBean> getUser(Long id) {
+		Optional<UserLed> result = userRepository.get(id);
+		
+		if(result.isPresent()){
+			UserLedBean bean = new UserLedBean();
+			bean.toBean(result);
+			return Optional.of(bean);
+		}
+
+		return Optional.empty();
+	}
 	
 }

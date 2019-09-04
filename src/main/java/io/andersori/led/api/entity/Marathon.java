@@ -1,6 +1,7 @@
 package io.andersori.led.api.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class Marathon extends AuditModel {
     private LocalDate date;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "marathon")
-    private List<ParticipantTeam> participants;
+    private List<ParticipantTeam> participants = new ArrayList<>();;
 
     public Marathon() {
         

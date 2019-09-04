@@ -16,10 +16,10 @@ public class UserLedBean implements BeanLed<UserLed> {
 	private String username;
 	private String password;
 	private LocalDateTime lastLogin;
-	private Set<RoleLed> roles;
+	private Set<RoleLed> roles = new HashSet<RoleLed>(Arrays.asList(RoleLed.NONE));;
 	
 	public UserLedBean() {
-		roles = new HashSet<RoleLed>(Arrays.asList(RoleLed.NONE));
+
 	}
 
 	public Long getId() {

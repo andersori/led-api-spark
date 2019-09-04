@@ -1,18 +1,18 @@
 package io.andersori.led.api;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import io.andersori.led.api.bean.TeamBean;
 import io.andersori.led.api.bean.UserLedBean;
-import io.andersori.led.api.controller.CourseController;
-import io.andersori.led.api.controller.MarathonController;
-import io.andersori.led.api.controller.ParticipantTeamController;
-import io.andersori.led.api.controller.SchoolClassController;
-import io.andersori.led.api.controller.SemesterController;
-import io.andersori.led.api.controller.StudentController;
-import io.andersori.led.api.controller.TeamController;
-import io.andersori.led.api.controller.UserController;
+import io.andersori.led.api.entity.RoleLed;
+import io.andersori.led.api.service.TeamServiceIm;
+import io.andersori.led.api.service.TeamServiceIn;
 import io.andersori.led.api.service.UserServiceIm;
 import io.andersori.led.api.service.UserServiceIn;
 import io.andersori.led.api.util.BeanUtil;
@@ -24,16 +24,7 @@ public class App {
 		ApplicationContext context = new AnnotationConfigApplicationContext(LedConfiguration.class);
 		
 		userRegister();
-
-		//Routers
-		new CourseController();
-		new MarathonController();
-		new ParticipantTeamController();
-		new SchoolClassController();
-		new SemesterController();
-		new StudentController();
-		new TeamController();
-		new UserController();
+		teamCreate();
 
 		//Close context
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -46,11 +37,30 @@ public class App {
 		UserServiceIn ser = BeanUtil.getBean(UserServiceIm.class);
 		
 		UserLedBean bean = new UserLedBean();
-		bean.setName("Anderson");
-		bean.setPassword("123");
+		bean.setName("Soriano");
+		bean.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
 		bean.setUsername("andersori");
+		bean.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.ADMIN, RoleLed.STUDENT)));
 
 		ser.register(bean);
+	}
+
+	public static void teamCreate() {
+		UserServiceIn serUsers = BeanUtil.getBean(UserServiceIm.class);
+		TeamServiceIn serTeam = BeanUtil.getBean(TeamServiceIm.class);
+
+		UserLedBean bean = new UserLedBean();
+		bean.setName("Temp");
+		bean.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
+		bean.setUsername("team");
+		bean.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
+
+		serUsers.register(bean);
+
+		TeamBean bean2 = new TeamBean();
+		bean2.setUser(serUsers.getUser(1L).get());
+
+		serTeam.register(bean2);
 	}
 	
 }

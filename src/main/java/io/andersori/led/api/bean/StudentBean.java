@@ -58,7 +58,7 @@ public class StudentBean implements BeanLed<Student> {
     
     @Override
     public void toBean(Optional<Student> entity) {
-        if(entity.isEmpty()){
+        if(entity.isPresent()){
             Student e = entity.get();
             this.setId(e.getId());
             this.setName(e.getName());

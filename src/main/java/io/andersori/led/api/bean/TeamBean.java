@@ -1,5 +1,6 @@
 package io.andersori.led.api.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,8 +13,8 @@ public class TeamBean implements BeanLed<Team> {
 
     private Long id;
     private UserLedBean user;
-    private List<StudentBean> students;
-    private List<ParticipantTeamBean> participations;
+    private List<StudentBean> students = new ArrayList<>();
+    private List<ParticipantTeamBean> participations = new ArrayList<>();
 
     public TeamBean() {
 
@@ -53,7 +54,7 @@ public class TeamBean implements BeanLed<Team> {
 
     @Override
     public void toBean(Optional<Team> entity) {
-        if(entity.isEmpty()){
+        if(entity.isPresent()){
             Team e = entity.get();
             this.setId(e.getId());
 

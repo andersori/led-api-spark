@@ -71,7 +71,7 @@ public class SchoolClassBean implements BeanLed<SchoolClass> {
 
     @Override
     public void toBean(Optional<SchoolClass> entity) {
-        if(entity.isEmpty()){
+        if(entity.isPresent()){
             SchoolClass e = entity.get();
             this.setId(e.getId());
             this.setName(e.getName());

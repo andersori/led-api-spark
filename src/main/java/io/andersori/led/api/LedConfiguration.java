@@ -40,7 +40,8 @@ public class LedConfiguration {
 	        settings.put(Environment.SHOW_SQL, "false");
 	        settings.put(Environment.HBM2DDL_AUTO, "create");
 	        settings.put(Environment.POOL_SIZE, "10");
-	        settings.put(Environment.NON_CONTEXTUAL_LOB_CREATION, "true");
+			settings.put(Environment.NON_CONTEXTUAL_LOB_CREATION, "true");
+			settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 	
 	        registryBuilder.applySettings(settings);
 	
