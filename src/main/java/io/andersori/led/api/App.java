@@ -5,6 +5,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import io.andersori.led.api.bean.UserLedBean;
+import io.andersori.led.api.controller.CourseController;
+import io.andersori.led.api.controller.MarathonController;
+import io.andersori.led.api.controller.ParticipantTeamController;
+import io.andersori.led.api.controller.SchoolClassController;
+import io.andersori.led.api.controller.SemesterController;
+import io.andersori.led.api.controller.StudentController;
+import io.andersori.led.api.controller.TeamController;
 import io.andersori.led.api.controller.UserController;
 import io.andersori.led.api.service.UserServiceIm;
 import io.andersori.led.api.service.UserServiceIn;
@@ -19,6 +26,13 @@ public class App {
 		userRegister();
 
 		//Routers
+		new CourseController();
+		new MarathonController();
+		new ParticipantTeamController();
+		new SchoolClassController();
+		new SemesterController();
+		new StudentController();
+		new TeamController();
 		new UserController();
 
 		//Close context
@@ -38,8 +52,5 @@ public class App {
 
 		ser.register(bean);
 	}
-
-	private static void marathonRegister() { 
-
-	}
+	
 }

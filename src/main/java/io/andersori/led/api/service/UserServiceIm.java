@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import io.andersori.led.api.bean.UserLedBean;
+import io.andersori.led.api.entity.UserLed;
 import io.andersori.led.api.repository.UserRepositoryIn;
 
 @Service("UserServiceIm")
@@ -27,11 +28,11 @@ public class UserServiceIm implements UserServiceIn {
 	public List<UserLedBean> getUsers() {
 		return userRepository.findAll()
 				.stream()
-				.map(u -> {
+				.map((UserLed u) -> {
 					UserLedBean bean = new UserLedBean();
 					bean.toBean(Optional.of(u));
 					return bean;
-					})
+				})
 				.collect(Collectors.toList());
 	}
 	
