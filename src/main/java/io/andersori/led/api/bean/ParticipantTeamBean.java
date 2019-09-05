@@ -2,17 +2,35 @@ package io.andersori.led.api.bean;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.andersori.led.api.entity.House;
+import io.andersori.led.api.entity.Marathon;
 import io.andersori.led.api.entity.ParticipantTeam;
+import io.andersori.led.api.entity.Team;
 
+@JsonIgnoreProperties({})
 public class ParticipantTeamBean implements BeanLed<ParticipantTeam> {
 
+    @JsonProperty("id")
     private Long id;
+
+    @JsonProperty("team")
     private TeamBean team;
+
+    @JsonProperty("score")
     private Integer score = 0;
+
+    @JsonProperty("entryDate")
     private LocalDateTime entryDate = LocalDateTime.now();
+
+    @JsonProperty("house")
     private House house = House.UNDEFINED;
+
+    @JsonProperty("marathon")
     private MarathonBean marathon;
 
     public ParticipantTeamBean() {
@@ -77,10 +95,30 @@ public class ParticipantTeamBean implements BeanLed<ParticipantTeam> {
             this.setHouse(e.getHouse());
 
             TeamBean team = new TeamBean();
+            //Removendo a participação atual - Evita Loop
+            Team te = e.getTeam();
+
+            te.setParticipations(te.getParticipations()
+            .stream()
+            .filter((ParticipantTeam p) -> p.getId() != this.getId())
+            .collect(Collectors.toList()));
+
+            e.setTeam(te);
+            //--------------
             team.toBean(Optional.of(e.getTeam()));
             this.setTeam(team);
 
             MarathonBean marathon = new MarathonBean();
+            //--Evitando Loop
+            Marathon mar = e.getMarathon();
+
+            mar.setParticipants(mar.getParticipants()
+            .stream()
+            .filter((ParticipantTeam p) -> p.getId() != this.getId())
+            .collect(Collectors.toList()));
+
+            e.setMarathon(mar);
+            //----------
             marathon.toBean(Optional.of(e.getMarathon()));
             this.setMarathon(marathon);
         }

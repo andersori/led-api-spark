@@ -36,4 +36,17 @@ public class TeamServiceIm implements TeamServiceIn {
         .collect(Collectors.toList());
 	}
 
+    @Override
+    public Optional<TeamBean> get(Long id) {
+        Optional<Team> result = teamRepository.get(id);
+        
+        if(result.isPresent()){
+            TeamBean bean = new TeamBean();
+            bean.toBean(result);
+            return Optional.of(bean);
+        }
+
+        return Optional.empty();
+    }
+
 }

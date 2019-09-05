@@ -2,7 +2,7 @@ package io.andersori.led.api.util;
 
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import spark.ResponseTransformer;
 
@@ -11,7 +11,9 @@ public class JsonTransformer implements ResponseTransformer {
 
 	@Override
 	public String render(Object model) throws Exception {
-		return new Gson().toJson(model);
+		ObjectMapper mapper = new ObjectMapper();
+
+		return mapper.writeValueAsString(model);
 	}
 	
 }

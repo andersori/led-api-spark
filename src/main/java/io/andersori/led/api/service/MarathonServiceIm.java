@@ -35,5 +35,18 @@ public class MarathonServiceIm implements MarathonServiceIn {
         })
         .collect(Collectors.toList());
 	}
+
+    @Override
+    public Optional<MarathonBean> get(Long id) {
+        Optional<Marathon> result = marathonRepository.get(id);
+
+        if(result.isPresent()){
+            MarathonBean bean = new MarathonBean();
+            bean.toBean(result);
+            return Optional.of(bean);
+        }
+
+        return Optional.empty();
+    }
     
 }

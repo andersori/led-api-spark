@@ -37,7 +37,7 @@ public class UserServiceIm implements UserServiceIn {
 	}
 
 	@Override
-	public Optional<UserLedBean> getUser(Long id) {
+	public Optional<UserLedBean> get(Long id) {
 		Optional<UserLed> result = userRepository.get(id);
 		
 		if(result.isPresent()){
