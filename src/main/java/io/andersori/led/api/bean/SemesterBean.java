@@ -2,11 +2,18 @@ package io.andersori.led.api.bean;
 
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.andersori.led.api.entity.Semester;
 
+@JsonIgnoreProperties({})
 public class SemesterBean implements BeanLed<Semester> {
 
+    @JsonProperty("year")
     private Integer year;
+
+    @JsonProperty("numberSemester")
     private Integer numberSemester;
 
     public SemesterBean() {

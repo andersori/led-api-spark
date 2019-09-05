@@ -6,14 +6,25 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.andersori.led.api.entity.Marathon;
 import io.andersori.led.api.entity.ParticipantTeam;
 
+@JsonIgnoreProperties({})
 public class MarathonBean implements BeanLed<Marathon> {
 
+    @JsonProperty("id")
     private Long id;
+
+    @JsonProperty("semester")
     private SemesterBean semester;
+
+    @JsonProperty("date")
     private LocalDate date;
+
+    @JsonProperty("participants")
     private List<ParticipantTeamBean> participants = new ArrayList<>();
 
     public MarathonBean() {

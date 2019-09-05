@@ -5,15 +5,26 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.andersori.led.api.entity.ParticipantTeam;
 import io.andersori.led.api.entity.Student;
 import io.andersori.led.api.entity.Team;
 
+@JsonIgnoreProperties({})
 public class TeamBean implements BeanLed<Team> {
 
+    @JsonProperty("id")
     private Long id;
+
+    @JsonProperty("user")
     private UserLedBean user;
+
+    @JsonProperty("students")
     private List<StudentBean> students = new ArrayList<>();
+
+    @JsonProperty("participations")
     private List<ParticipantTeamBean> participations = new ArrayList<>();
 
     public TeamBean() {

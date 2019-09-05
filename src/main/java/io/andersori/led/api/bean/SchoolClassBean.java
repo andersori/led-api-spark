@@ -5,16 +5,31 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.andersori.led.api.entity.SchoolClass;
 import io.andersori.led.api.entity.Student;
 
+@JsonIgnoreProperties({})
 public class SchoolClassBean implements BeanLed<SchoolClass> {
 
+    @JsonProperty("id")
     private Long id;
+
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("codClass")
     private String codClass;
+
+    @JsonProperty("semester")
     private SemesterBean semester;
+
+    @JsonProperty("course")
     private CourseBean course;
+
+    @JsonProperty("students")
     private List<StudentBean> students = new ArrayList<>();
 
     public SchoolClassBean() {

@@ -2,14 +2,27 @@ package io.andersori.led.api.bean;
 
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.andersori.led.api.entity.Student;
 
+@JsonIgnoreProperties({})
 public class StudentBean implements BeanLed<Student> {
 
+    @JsonProperty("id")
     private Long id;
+
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("registration")
     private Long registration;
+
+    @JsonProperty("course")
     private CourseBean course;
+
+    @JsonProperty("schoolClass")
     private SchoolClassBean schoolClass;
 
     public StudentBean() {

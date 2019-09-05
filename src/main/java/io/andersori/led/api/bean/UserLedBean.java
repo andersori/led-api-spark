@@ -6,16 +6,31 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.andersori.led.api.entity.RoleLed;
 import io.andersori.led.api.entity.UserLed;
 
+@JsonIgnoreProperties({})
 public class UserLedBean implements BeanLed<UserLed> {
 	
+	@JsonProperty("id")
 	private Long id;
+
+	@JsonProperty("name")
 	private String name;
+
+	@JsonProperty("username")
 	private String username;
+
+	@JsonProperty("password")
 	private String password;
+
+	@JsonProperty("lastLogin")
 	private LocalDateTime lastLogin;
+
+	@JsonProperty("roles")
 	private Set<RoleLed> roles = new HashSet<RoleLed>(Arrays.asList(RoleLed.NONE));;
 	
 	public UserLedBean() {
