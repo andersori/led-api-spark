@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component("Auditor")
 public class Auditor {
 	
-	private static final ThreadLocal<String> userContex = new ThreadLocal<>(){
+	private static final ThreadLocal<String> userContex = new ThreadLocal<String>(){
 
 		@Override
 		protected String initialValue(){

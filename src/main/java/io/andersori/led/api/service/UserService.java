@@ -46,5 +46,15 @@ public class UserService implements IUserService {
 
 		return Optional.empty();
 	}
+
+	@Override
+	public Optional<UserLedDto> getUser(String username) {
+		Optional<UserLed> user = userRepository.findByUsername(username);
+		if(user.isPresent()){
+			UserLedDto bean = new UserLedDto();
+			return Optional.of(bean.toDto(user.get()));
+		}
+		return Optional.empty();
+	}
 	
 }

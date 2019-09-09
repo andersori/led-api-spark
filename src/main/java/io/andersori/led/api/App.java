@@ -33,9 +33,9 @@ public class App {
 		ApplicationContext context = new AnnotationConfigApplicationContext(LedConfiguration.class);
 		
 		userRegister();
-		teamCreate();
-		createMarathon();
-		createParticipants();
+		//teamCreate();
+		//createMarathon();
+		//createParticipants();
 		//createCourses();
 
 		Spark.get("/", (req, res) -> {
