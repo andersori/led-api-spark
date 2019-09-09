@@ -47,7 +47,7 @@ public class TokenGenerationController {
                 
         if(result.isPresent()) {
             if(BCrypt.checkpw(user.getPassword(), result.get().getPassword())) {            
-                return Optional.of(JWT.create().withSubject(result.get().getUsername()).withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME)).sign(Algorithm.HMAC512((SecurityConstants.SECRET.getBytes()))));
+                return Optional.of(SecurityConstants.TOKEN_PREFIX + JWT.create().withSubject(user.getUsername()).withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME)).sign(Algorithm.HMAC512((SecurityConstants.SECRET.getBytes()))));
             }
         }
         return Optional.empty();
