@@ -1,37 +1,35 @@
 package io.andersori.led.api.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import io.andersori.led.api.bean.StudentBean;
+import io.andersori.led.api.dto.StudentDto;
 import io.andersori.led.api.entity.Student;
 import io.andersori.led.api.repository.StudentRepositoryIn;
 
-@Service("StudentServiceIm")
-public class StudentServiceIm implements StudentServiceIn {
+@Service("StudentService")
+public class StudentService implements IStudentService {
 
     @Autowired
     @Qualifier("StudentRepositoryIm")
     private StudentRepositoryIn studentRepository;
 
     @Override
-    public void register(StudentBean student) {
-        studentRepository.save(student.toEntity());
+    public void register(StudentDto student) {
+        studentRepository.save(student.toEntity(student));
     }
 
 	@Override
-	public List<StudentBean> getStudents() {
+	public List<StudentDto> getStudents() {
         return studentRepository.findAll()
         .stream()
         .map((Student s) -> {
-            StudentBean bean = new StudentBean();
-            bean.toBean(Optional.of(s));
-            return bean;
+            StudentDto bean = new StudentDto();
+            return bean.toDto(s);
         })
         .collect(Collectors.toList());
 	}

@@ -8,42 +8,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import io.andersori.led.api.bean.MarathonBean;
+import io.andersori.led.api.dto.MarathonDto;
 import io.andersori.led.api.entity.Marathon;
 import io.andersori.led.api.repository.MarathonRepositoryIn;
 
-@Service("MarathonServiceIm")
-public class MarathonServiceIm implements MarathonServiceIn {
+@Service("MarathonService")
+public class MarathonService implements IMarathonService {
 
     @Autowired
     @Qualifier("MarathonRepositoryIm")
     private MarathonRepositoryIn marathonRepository;
 
     @Override
-    public void register(MarathonBean marathon) {
-        marathonRepository.save(marathon.toEntity());
+    public void register(MarathonDto marathon) {
+        marathonRepository.save(marathon.toEntity(marathon));
     }
 
 	@Override
-	public List<MarathonBean> getMarathons() {
+	public List<MarathonDto> getMarathons() {
         return marathonRepository.findAll()
         .stream()
         .map((Marathon m) -> {
-            MarathonBean bean = new MarathonBean();
-            bean.toBean(Optional.of(m));
-            return bean;
+            MarathonDto bean = new MarathonDto();
+            return bean.toDto(m);
         })
         .collect(Collectors.toList());
 	}
 
     @Override
-    public Optional<MarathonBean> get(Long id) {
+    public Optional<MarathonDto> get(Long id) {
         Optional<Marathon> result = marathonRepository.get(id);
 
         if(result.isPresent()){
-            MarathonBean bean = new MarathonBean();
-            bean.toBean(result);
-            return Optional.of(bean);
+            MarathonDto bean = new MarathonDto();
+            return Optional.of(bean.toDto(result.get()));
         }
 
         return Optional.empty();

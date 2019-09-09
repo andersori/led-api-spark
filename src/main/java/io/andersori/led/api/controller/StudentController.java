@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
-import io.andersori.led.api.service.StudentServiceIn;
+import io.andersori.led.api.service.IStudentService;
 import io.andersori.led.api.util.JsonTransformer;
 import spark.Spark;
 
@@ -12,8 +12,8 @@ import spark.Spark;
 public class StudentController {
 
     @Autowired
-    @Qualifier("StudentServiceIm")
-    private StudentServiceIn studentService;
+    @Qualifier("StudentService")
+    private IStudentService studentService;
 
     public StudentController(){
 

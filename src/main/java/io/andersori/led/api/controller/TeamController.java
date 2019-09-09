@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
-import io.andersori.led.api.service.TeamServiceIn;
+import io.andersori.led.api.service.ITeamService;
 import io.andersori.led.api.util.JsonTransformer;
 import spark.Spark;
 
@@ -12,8 +12,8 @@ import spark.Spark;
 public class TeamController {
 	
 	@Autowired
-	@Qualifier("TeamServiceIm")
-	private TeamServiceIn teamService;
+	@Qualifier("TeamService")
+	private ITeamService teamService;
 	
 	public TeamController() {
 		

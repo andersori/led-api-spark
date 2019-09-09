@@ -1,16 +1,25 @@
 package io.andersori.led.api.config;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Component;
 
 @Component("Auditor")
 public class Auditor {
 	
-	private static final String auditor = "led_auditor";
+	private static final ThreadLocal<String> userContex = new ThreadLocal<>(){
+
+		@Override
+		protected String initialValue(){
+			return "led_default_auditor";
+		}
+		
+	};
+
+	public void setUser(String username) {
+		userContex.set(username);
+	}
 	
-	public Optional<String> getCurrentAuditor() {
-		return Optional.of(auditor);
+	public String getUser() {
+		return userContex.get();
 	}
 	
 }

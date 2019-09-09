@@ -19,8 +19,8 @@ public class AuditorListener {
 
 		model.setCreatedAt(LocalDateTime.now());
 		model.setUpdatedAt(LocalDateTime.now());
-		model.setCreatedBy(auditor.getCurrentAuditor().get());
-		model.setLastModifieldBy(auditor.getCurrentAuditor().get());
+		model.setCreatedBy(auditor.getUser());
+		model.setLastModifieldBy(auditor.getUser());
 	}
 	
 	@PreUpdate
@@ -28,7 +28,7 @@ public class AuditorListener {
 		Auditor auditor = BeanUtil.getBean(Auditor.class);
 
 		model.setUpdatedAt(LocalDateTime.now());
-		model.setLastModifieldBy(auditor.getCurrentAuditor().get());
+		model.setLastModifieldBy(auditor.getUser());
 	}
 	
 }

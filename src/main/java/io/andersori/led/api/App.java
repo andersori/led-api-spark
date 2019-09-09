@@ -9,27 +9,20 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import io.andersori.led.api.bean.CourseBean;
-import io.andersori.led.api.bean.MarathonBean;
-import io.andersori.led.api.bean.ParticipantTeamBean;
-import io.andersori.led.api.bean.SchoolClassBean;
-import io.andersori.led.api.bean.SemesterBean;
-import io.andersori.led.api.bean.StudentBean;
-import io.andersori.led.api.bean.TeamBean;
-import io.andersori.led.api.bean.UserLedBean;
+import io.andersori.led.api.dto.MarathonDto;
+import io.andersori.led.api.dto.ParticipantTeamDto;
+import io.andersori.led.api.dto.SemesterDto;
+import io.andersori.led.api.dto.TeamDto;
+import io.andersori.led.api.dto.UserLedDto;
 import io.andersori.led.api.entity.RoleLed;
-import io.andersori.led.api.service.CourseServiceIm;
-import io.andersori.led.api.service.CourseServiceIn;
-import io.andersori.led.api.service.MarathonServiceIm;
-import io.andersori.led.api.service.MarathonServiceIn;
-import io.andersori.led.api.service.ParticipantTeamServiceIm;
-import io.andersori.led.api.service.ParticipantTeamServiceIn;
-import io.andersori.led.api.service.SchoolClassServiceIm;
-import io.andersori.led.api.service.SchoolClassServiceIn;
-import io.andersori.led.api.service.TeamServiceIm;
-import io.andersori.led.api.service.TeamServiceIn;
-import io.andersori.led.api.service.UserServiceIm;
-import io.andersori.led.api.service.UserServiceIn;
+import io.andersori.led.api.service.IMarathonService;
+import io.andersori.led.api.service.IParticipantTeamService;
+import io.andersori.led.api.service.ITeamService;
+import io.andersori.led.api.service.IUserService;
+import io.andersori.led.api.service.MarathonService;
+import io.andersori.led.api.service.ParticipantTeamService;
+import io.andersori.led.api.service.TeamService;
+import io.andersori.led.api.service.UserService;
 import io.andersori.led.api.util.BeanUtil;
 import spark.Spark;
 
@@ -43,6 +36,7 @@ public class App {
 		teamCreate();
 		createMarathon();
 		createParticipants();
+		//createCourses();
 
 		Spark.get("/", (req, res) -> {
 			return "Working";
@@ -56,27 +50,27 @@ public class App {
 	}
 
 	private static void userRegister() {
-		UserServiceIn ser = BeanUtil.getBean(UserServiceIm.class);
+		IUserService ser = BeanUtil.getBean(UserService.class);
 		
-		UserLedBean bean = new UserLedBean();
+		UserLedDto bean = new UserLedDto();
 		bean.setName("Soriano");
 		bean.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
 		bean.setUsername("andersori");
 		bean.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.ADMIN, RoleLed.STUDENT)));
 
-		UserLedBean bean1 = new UserLedBean();
+		UserLedDto bean1 = new UserLedDto();
 		bean1.setName("Equipe_1");
 		bean1.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
 		bean1.setUsername("team1");
 		bean1.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
 
-		UserLedBean bean2 = new UserLedBean();
+		UserLedDto bean2 = new UserLedDto();
 		bean2.setName("Equipe_2");
 		bean2.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
 		bean2.setUsername("team2");
 		bean2.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
 
-		UserLedBean bean3 = new UserLedBean();
+		UserLedDto bean3 = new UserLedDto();
 		bean3.setName("Equipe_3");
 		bean3.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
 		bean3.setUsername("team3");
@@ -88,21 +82,23 @@ public class App {
 		ser.register(bean3);
 	}
 
+	
 	public static void teamCreate() {
-		UserServiceIn serUsers = BeanUtil.getBean(UserServiceIm.class);
-		TeamServiceIn serTeam = BeanUtil.getBean(TeamServiceIm.class);
+		IUserService serUsers = BeanUtil.getBean(UserService.class);
+		ITeamService serTeam = BeanUtil.getBean(TeamService.class);
 
-		TeamBean bean2 = new TeamBean();
+		TeamDto bean2 = new TeamDto();
 		bean2.setUser(serUsers.get(2L).get());
 
 		serTeam.register(bean2);
 	}
 
+	
 	public static void createMarathon() {
-		MarathonBean mar1 = new MarathonBean();
-		MarathonBean mar2 = new MarathonBean();
+		MarathonDto mar1 = new MarathonDto();
+		MarathonDto mar2 = new MarathonDto();
 
-		SemesterBean ses = new SemesterBean();
+		SemesterDto ses = new SemesterDto();
 		ses.setNumberSemester(2);
 		ses.setYear(2019);
 
@@ -112,27 +108,27 @@ public class App {
 		mar2.setDate(LocalDate.of(2019, 10, 1));
 		mar2.setSemester(ses);
 		
-		MarathonServiceIn marService = BeanUtil.getBean(MarathonServiceIm.class);
+		IMarathonService marService = BeanUtil.getBean(MarathonService.class);
 		marService.register(mar1);
 		marService.register(mar2);
 
 	}
 
 	public static void createParticipants() {
-		ParticipantTeamServiceIn parService = BeanUtil.getBean(ParticipantTeamServiceIm.class);
-		MarathonServiceIn marService = BeanUtil.getBean(MarathonServiceIm.class);
-		TeamServiceIn teamService = BeanUtil.getBean(TeamServiceIm.class);
+		IParticipantTeamService parService = BeanUtil.getBean(ParticipantTeamService.class);
+		IMarathonService marService = BeanUtil.getBean(MarathonService.class);
+		ITeamService teamService = BeanUtil.getBean(TeamService.class);
 
-		MarathonBean marBean = marService.get(1L).get();
-		TeamBean teamBean = teamService.get(1L).get();
+		MarathonDto marBean = marService.get(1L).get();
+		TeamDto teamBean = teamService.get(1L).get();
 
-		ParticipantTeamBean part1 = new ParticipantTeamBean();
+		ParticipantTeamDto part1 = new ParticipantTeamDto();
 		part1.setMarathon(marBean);
 		part1.setTeam(teamBean);
 
 		parService.register(part1);
 	}
-
+	/*
 	public static void createCourses() {
 		CourseBean curso1 = new CourseBean();
 		curso1.setName("Engenharia de Software");
@@ -171,4 +167,5 @@ public class App {
 		bean4.setRegistration(666666L);
 
 	}
+	*/
 }

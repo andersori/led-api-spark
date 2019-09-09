@@ -8,42 +8,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import io.andersori.led.api.bean.UserLedBean;
+import io.andersori.led.api.dto.UserLedDto;
 import io.andersori.led.api.entity.UserLed;
 import io.andersori.led.api.repository.UserRepositoryIn;
 
-@Service("UserServiceIm")
-public class UserServiceIm implements UserServiceIn {
+@Service("UserService")
+public class UserService implements IUserService {
 	
 	@Autowired
 	@Qualifier("UserRepositoryIm")
 	private UserRepositoryIn userRepository;
 
 	@Override
-	public void register(UserLedBean user) {
-		userRepository.save(user.toEntity());
+	public void register(UserLedDto user) {
+		userRepository.save(user.toEntity(user));
 	}
 
 	@Override
-	public List<UserLedBean> getUsers() {
+	public List<UserLedDto> getUsers() {
 		return userRepository.findAll()
 		.stream()
 		.map((UserLed u) -> {
-			UserLedBean bean = new UserLedBean();
-			bean.toBean(Optional.of(u));
-			return bean;
+			UserLedDto bean = new UserLedDto();
+			return bean.toDto(u);
 		})
 		.collect(Collectors.toList());
 	}
 
 	@Override
-	public Optional<UserLedBean> get(Long id) {
+	public Optional<UserLedDto> get(Long id) {
 		Optional<UserLed> result = userRepository.get(id);
 		
 		if(result.isPresent()){
-			UserLedBean bean = new UserLedBean();
-			bean.toBean(result);
-			return Optional.of(bean);
+			UserLedDto bean = new UserLedDto();
+			return Optional.of(bean.toDto(result.get()));
 		}
 
 		return Optional.empty();

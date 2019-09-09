@@ -1,6 +1,4 @@
-package io.andersori.led.api.bean;
-
-import java.util.Optional;
+package io.andersori.led.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.andersori.led.api.entity.Semester;
 
 @JsonIgnoreProperties({})
-public class SemesterBean implements BeanLed<Semester> {
+public class SemesterDto extends Dto<Semester, SemesterDto> {
 
     @JsonProperty("year")
     private Integer year;
@@ -16,8 +14,12 @@ public class SemesterBean implements BeanLed<Semester> {
     @JsonProperty("numberSemester")
     private Integer numberSemester;
 
-    public SemesterBean() {
+    public SemesterDto(Class<Semester> sourceType, Class<SemesterDto> destinationType) {
+        super(sourceType, destinationType);
+    }
 
+    public SemesterDto() {
+        this(Semester.class, SemesterDto.class);
     }
 
     public Integer getYear() {
@@ -35,22 +37,5 @@ public class SemesterBean implements BeanLed<Semester> {
     public void setNumberSemester(Integer numberSemester) {
         this.numberSemester = numberSemester;
     }
-
-    @Override
-    public void toBean(Optional<Semester> entity) {
-        if(entity.isPresent()){
-            Semester e = entity.get();
-            this.setNumberSemester(e.getNumberSemester());
-            this.setYear(e.getYear());
-        }
-    }
-
-    @Override
-    public Semester toEntity() {
-        Semester entity = new Semester();
-        entity.setNumberSemester(this.getNumberSemester());
-        entity.setYear(this.getYear());
-        return entity;
-	}
 
 }
