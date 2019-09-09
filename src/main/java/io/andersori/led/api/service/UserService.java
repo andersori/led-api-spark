@@ -12,8 +12,8 @@ import io.andersori.led.api.bean.UserLedBean;
 import io.andersori.led.api.entity.UserLed;
 import io.andersori.led.api.repository.UserRepositoryIn;
 
-@Service("UserServiceIm")
-public class UserServiceIm implements UserServiceIn {
+@Service("UserService")
+public class UserService implements IUserService {
 	
 	@Autowired
 	@Qualifier("UserRepositoryIm")
@@ -46,6 +46,17 @@ public class UserServiceIm implements UserServiceIn {
 			return Optional.of(bean);
 		}
 
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<UserLedBean> getUser(String username) {
+		Optional<UserLed> user = userRepository.findByUsername(username);
+		if(user.isPresent()){
+			UserLedBean bean = new UserLedBean();
+			bean.toBean(user);
+			return Optional.of(bean);
+		}
 		return Optional.empty();
 	}
 	
