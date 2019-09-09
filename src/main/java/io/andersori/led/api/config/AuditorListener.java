@@ -8,27 +8,22 @@ import javax.persistence.PreUpdate;
 import org.springframework.stereotype.Component;
 
 import io.andersori.led.api.entity.AuditModel;
-import io.andersori.led.api.util.BeanUtil;
 
 @Component
 public class AuditorListener {
 	
 	@PrePersist
 	private void onPrePersist(AuditModel model) {
-		Auditor auditor = BeanUtil.getBean(Auditor.class);
-
 		model.setCreatedAt(LocalDateTime.now());
 		model.setUpdatedAt(LocalDateTime.now());
-		model.setCreatedBy(auditor.getUser());
-		model.setLastModifieldBy(auditor.getUser());
+		model.setCreatedBy(Auditor.getUser());
+		model.setLastModifieldBy(Auditor.getUser());
 	}
 	
 	@PreUpdate
 	private void onPreUpdate(AuditModel model) {
-		Auditor auditor = BeanUtil.getBean(Auditor.class);
-
 		model.setUpdatedAt(LocalDateTime.now());
-		model.setLastModifieldBy(auditor.getUser());
+		model.setLastModifieldBy(Auditor.getUser());
 	}
 	
 }

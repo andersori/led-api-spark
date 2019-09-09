@@ -23,9 +23,6 @@ public class AuthenticationFilter {
     @Autowired
     private UserDetails userDetails;
 
-    @Autowired
-    private Auditor auditor;
-
     public AuthenticationFilter() {
         Spark.before((req, res) -> {
             User credentials = new ObjectMapper().readValue(req.body(), User.class);
@@ -36,7 +33,7 @@ public class AuthenticationFilter {
                 if(result.isPresent()) {
                     if(BCrypt.checkpw(credentials.getPassword(), result.get().getPassword())) {
                         
-                        auditor.setUser(result.get().getUsername());
+                        Auditor.setUser(result.get().getUsername());
                         
                         String token = JWT.create().withSubject(result.get().getUsername()).withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME)).sign(Algorithm.HMAC512((SecurityConstants.SECRET.getBytes())));;
                         res.header("HEADER_STRING", "TOKEN_PREFIX" + token);

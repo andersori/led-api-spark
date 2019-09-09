@@ -1,8 +1,5 @@
 package io.andersori.led.api.config;
 
-import org.springframework.stereotype.Component;
-
-@Component("Auditor")
 public class Auditor {
 	
 	private static final ThreadLocal<String> userContex = new ThreadLocal<String>(){
@@ -14,11 +11,11 @@ public class Auditor {
 		
 	};
 
-	public void setUser(String username) {
+	public static void setUser(String username) {
 		userContex.set(username);
 	}
 	
-	public String getUser() {
+	public static String getUser() {
 		return userContex.get();
 	}
 	
