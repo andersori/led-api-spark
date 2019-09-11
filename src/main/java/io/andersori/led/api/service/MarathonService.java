@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 
 import io.andersori.led.api.dto.MarathonDTO;
 import io.andersori.led.api.entity.Marathon;
-import io.andersori.led.api.repository.MarathonRepositoryIn;
+import io.andersori.led.api.repository.IMarathonRepository;
 
 @Service("MarathonService")
 public class MarathonService implements IMarathonService {
 
     @Autowired
-    @Qualifier("MarathonRepositoryIm")
-    private MarathonRepositoryIn marathonRepository;
+    @Qualifier("MarathonRepository")
+    private IMarathonRepository marathonRepository;
 
     @Override
     public void register(MarathonDTO marathon) {

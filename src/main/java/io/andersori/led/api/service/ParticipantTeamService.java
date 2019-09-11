@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 
 import io.andersori.led.api.dto.ParticipantTeamDTO;
 import io.andersori.led.api.entity.ParticipantTeam;
-import io.andersori.led.api.repository.ParticipantTeamRepositoryIn;
+import io.andersori.led.api.repository.IParticipantTeamRepository;
 
 @Service("ParticipantTeamService")
 public class ParticipantTeamService implements IParticipantTeamService {
 
     @Autowired
-    @Qualifier("ParticipantTeamRepositoryIm")
-    private ParticipantTeamRepositoryIn participantTeamRepository;
+    @Qualifier("ParticipantTeamRepository")
+    private IParticipantTeamRepository participantTeamRepository;
 
     @Override
     public void register(ParticipantTeamDTO participant) {

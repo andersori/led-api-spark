@@ -4,14 +4,14 @@ import org.springframework.stereotype.Repository;
 
 import io.andersori.led.api.entity.Team;
 
-@Repository("TeamRepositoryIm")
-public class TeamRepositoryIm extends DAOHibernate<Team> implements TeamRepositoryIn {
+@Repository("TeamRepository")
+public class TeamRepository extends DAOHibernate<Team> implements ITeamRepository {
 
-    protected TeamRepositoryIm(Class<Team> type) {
+    protected TeamRepository(Class<Team> type) {
         super(type);
     }
 
-    public TeamRepositoryIm() {
+    public TeamRepository() {
         this(Team.class);
     }
     

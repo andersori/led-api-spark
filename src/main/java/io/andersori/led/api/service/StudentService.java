@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 
 import io.andersori.led.api.dto.StudentDTO;
 import io.andersori.led.api.entity.Student;
-import io.andersori.led.api.repository.StudentRepositoryIn;
+import io.andersori.led.api.repository.IStudentRepository;
 
 @Service("StudentService")
 public class StudentService implements IStudentService {
 
     @Autowired
-    @Qualifier("StudentRepositoryIm")
-    private StudentRepositoryIn studentRepository;
+    @Qualifier("StudentRepository")
+    private IStudentRepository studentRepository;
 
     @Override
     public void register(StudentDTO student) {

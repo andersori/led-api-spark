@@ -10,14 +10,14 @@ import org.springframework.stereotype.Repository;
 
 import io.andersori.led.api.dto.SchoolClassDTO;
 import io.andersori.led.api.entity.SchoolClass;
-import io.andersori.led.api.repository.SchoolClassRepositoryIn;
+import io.andersori.led.api.repository.ISchoolClassRepository;
 
 @Repository("SchoolClassService")
 public class SchoolClassService implements ISchoolClassService {
 
     @Autowired
-    @Qualifier("SchoolClassRepositoryIm")
-    private SchoolClassRepositoryIn schoolClassRepository;
+    @Qualifier("SchoolClassRepository")
+    private ISchoolClassRepository schoolClassRepository;
 
     @Override
     public void register(SchoolClassDTO schoolClass) {

@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 
 import io.andersori.led.api.dto.SemesterDTO;
 import io.andersori.led.api.entity.Semester;
-import io.andersori.led.api.repository.SemesterRepositoryIn;
+import io.andersori.led.api.repository.ISemesterRepository;
 
 @Service("SemesterService")
 public class SemesterService implements ISemesterService {
 
     @Autowired
-    @Qualifier("SemesterRepositoryIm")
-    private SemesterRepositoryIn semesterRepository;
+    @Qualifier("SemesterRepository")
+    private ISemesterRepository semesterRepository;
 
     @Override
     public void register(SemesterDTO semester) {

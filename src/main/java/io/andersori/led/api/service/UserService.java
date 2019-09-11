@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 
 import io.andersori.led.api.dto.UserLedDTO;
 import io.andersori.led.api.entity.UserLed;
-import io.andersori.led.api.repository.UserRepositoryIn;
+import io.andersori.led.api.repository.IUserRepository;
 
 @Service("UserService")
 public class UserService implements IUserService {
 	
 	@Autowired
-	@Qualifier("UserRepositoryIm")
-	private UserRepositoryIn userRepository;
+	@Qualifier("UserRepository")
+	private IUserRepository userRepository;
 
 	@Override
 	public void register(UserLedDTO user) {

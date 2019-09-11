@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 
 import io.andersori.led.api.dto.CourseDTO;
 import io.andersori.led.api.entity.Course;
-import io.andersori.led.api.repository.CourseRepositoryIn;
+import io.andersori.led.api.repository.ICourseRepository;
 
 @Service("CourseService")
 public class CourseService implements ICourseService {
 
     @Autowired
-    @Qualifier("CourseRepositoryIm")
-    private CourseRepositoryIn courseReposiroty;
+    @Qualifier("CourseRepository")
+    private ICourseRepository courseReposiroty;
 
     @Override
     public void register(CourseDTO course) {
