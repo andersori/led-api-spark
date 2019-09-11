@@ -33,9 +33,9 @@ public class App {
 		ApplicationContext context = new AnnotationConfigApplicationContext(LedConfiguration.class);
 		
 		userRegister();
-		//teamCreate();
-		//createMarathon();
-		//createParticipants();
+		teamCreate();
+		createMarathon();
+		createParticipants();
 		//createCourses();
 
 		Spark.get("/", (req, res) -> {
@@ -52,34 +52,34 @@ public class App {
 	private static void userRegister() {
 		IUserService ser = BeanUtil.getBean(UserService.class);
 		
-		UserLedDTO bean = new UserLedDTO();
-		bean.setName("Soriano");
-		bean.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
-		bean.setUsername("andersori");
-		bean.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.ADMIN, RoleLed.STUDENT)));
+		UserLedDTO dto = new UserLedDTO();
+		dto.setName("Soriano");
+		dto.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
+		dto.setUsername("andersori");
+		dto.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.ADMIN, RoleLed.STUDENT)));
 
-		UserLedDTO bean1 = new UserLedDTO();
-		bean1.setName("Equipe_1");
-		bean1.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
-		bean1.setUsername("team1");
-		bean1.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
+		UserLedDTO dto1 = new UserLedDTO();
+		dto1.setName("Equipe_1");
+		dto1.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
+		dto1.setUsername("team1");
+		dto1.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
 
-		UserLedDTO bean2 = new UserLedDTO();
-		bean2.setName("Equipe_2");
-		bean2.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
-		bean2.setUsername("team2");
-		bean2.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
+		UserLedDTO dto2 = new UserLedDTO();
+		dto2.setName("Equipe_2");
+		dto2.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
+		dto2.setUsername("team2");
+		dto2.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
 
-		UserLedDTO bean3 = new UserLedDTO();
-		bean3.setName("Equipe_3");
-		bean3.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
-		bean3.setUsername("team3");
-		bean3.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
+		UserLedDTO dto3 = new UserLedDTO();
+		dto3.setName("Equipe_3");
+		dto3.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
+		dto3.setUsername("team3");
+		dto3.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
 
-		ser.register(bean);
-		ser.register(bean1);
-		ser.register(bean2);
-		ser.register(bean3);
+		ser.register(dto);
+		ser.register(dto1);
+		ser.register(dto2);
+		ser.register(dto3);
 	}
 
 	
@@ -87,10 +87,10 @@ public class App {
 		IUserService serUsers = BeanUtil.getBean(UserService.class);
 		ITeamService serTeam = BeanUtil.getBean(TeamService.class);
 
-		TeamDTO bean2 = new TeamDTO();
-		bean2.setUser(serUsers.get(2L).get());
+		TeamDTO dto = new TeamDTO();
+		dto.setUser(serUsers.get(2L).get());
 
-		serTeam.register(bean2);
+		serTeam.register(dto);
 	}
 
 	
