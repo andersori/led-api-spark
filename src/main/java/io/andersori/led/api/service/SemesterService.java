@@ -28,8 +28,8 @@ public class SemesterService implements ISemesterService {
         return semesterRepository.findAll()
         .stream()
         .map((Semester s) -> {
-            SemesterDTO bean = new SemesterDTO();
-            return bean.toDto(s);
+            SemesterDTO dto = new SemesterDTO();
+            return dto.toDto(s);
         })
         .collect(Collectors.toList());
 	}

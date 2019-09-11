@@ -14,4 +14,5 @@ public class SchoolClassRepository extends DAOHibernate<SchoolClass> implements 
     public SchoolClassRepository() {
         this(SchoolClass.class);
     }
+    
 }

@@ -29,8 +29,8 @@ public class TeamService implements ITeamService {
         return teamRepository.findAll()
         .stream()
         .map((Team e) -> {
-            TeamDTO bean = new TeamDTO();
-            return bean.toDto(e);
+            TeamDTO dto = new TeamDTO();
+            return dto.toDto(e);
         })
         .collect(Collectors.toList());
 	}
@@ -38,12 +38,10 @@ public class TeamService implements ITeamService {
     @Override
     public Optional<TeamDTO> get(Long id) {
         Optional<Team> result = teamRepository.get(id);
-        
         if(result.isPresent()){
-            TeamDTO bean = new TeamDTO();
-            return Optional.of(bean.toDto(result.get()));
+            TeamDTO dto = new TeamDTO();
+            return Optional.of(dto.toDto(result.get()));
         }
-
         return Optional.empty();
     }
 

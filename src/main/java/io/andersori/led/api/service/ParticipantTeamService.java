@@ -28,8 +28,8 @@ public class ParticipantTeamService implements IParticipantTeamService {
         return participantTeamRepository.findAll()
         .stream()
         .map((ParticipantTeam p) -> {
-            ParticipantTeamDTO bean = new ParticipantTeamDTO();
-            return bean.toDto(p);
+            ParticipantTeamDTO dto = new ParticipantTeamDTO();
+            return dto.toDto(p);
         })
         .collect(Collectors.toList());
 	}

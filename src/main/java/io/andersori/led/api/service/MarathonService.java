@@ -15,7 +15,7 @@ import io.andersori.led.api.repository.IMarathonRepository;
 @Service("MarathonService")
 public class MarathonService implements IMarathonService {
 
-    @Autowired
+	@Autowired
     @Qualifier("MarathonRepository")
     private IMarathonRepository marathonRepository;
 
@@ -29,8 +29,8 @@ public class MarathonService implements IMarathonService {
         return marathonRepository.findAll()
         .stream()
         .map((Marathon m) -> {
-            MarathonDTO bean = new MarathonDTO();
-            return bean.toDto(m);
+            MarathonDTO dto = new MarathonDTO();
+            return dto.toDto(m);
         })
         .collect(Collectors.toList());
 	}
@@ -38,12 +38,10 @@ public class MarathonService implements IMarathonService {
     @Override
     public Optional<MarathonDTO> get(Long id) {
         Optional<Marathon> result = marathonRepository.get(id);
-
         if(result.isPresent()){
-            MarathonDTO bean = new MarathonDTO();
-            return Optional.of(bean.toDto(result.get()));
+            MarathonDTO dto = new MarathonDTO();
+            return Optional.of(dto.toDto(result.get()));
         }
-
         return Optional.empty();
     }
     

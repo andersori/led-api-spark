@@ -8,19 +8,17 @@ import com.auth0.jwt.exceptions.SignatureVerificationException;
 import org.springframework.stereotype.Component;
 
 import io.andersori.led.api.config.Auditor;
+import io.andersori.led.api.security.PrivatePath;
 import io.andersori.led.api.security.SecurityConstants;
 import spark.Spark;
 
-import static io.andersori.led.api.security.SecurityConstants.PROTECTED_PATH;
-
 @Component
-public class AuthorizationFilter {
-
-    private final String PATH = PROTECTED_PATH + "/*";
+public class AuthorizationFilter extends PrivatePath {
 
     public AuthorizationFilter() {
-
-        Spark.before(PATH, (req, res) -> {
+    	super("/*");
+    	
+        Spark.before(getPath(), (req, res) -> {
             boolean authorized = false;
             String msg = "Get away!";
 

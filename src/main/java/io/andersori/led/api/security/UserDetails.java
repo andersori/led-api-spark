@@ -18,10 +18,10 @@ public class UserDetails {
     private IUserService userService;
 
     public Optional<User> loadUserByUsername(String username) {
-        Optional<UserLedDTO> result = userService.getUser(username);
+        Optional<UserLedDTO> result = userService.get(username);
         if(result.isPresent()){
-            UserLedDTO bean = result.get();
-            User user = new User(bean.getUsername(), bean.getPassword(), new ArrayList<>(bean.getRoles()));
+            UserLedDTO dto = result.get();
+            User user = new User(dto.getUsername(), dto.getPassword(), new ArrayList<>(dto.getRoles()));
             return Optional.of(user);
         }
         return Optional.empty();

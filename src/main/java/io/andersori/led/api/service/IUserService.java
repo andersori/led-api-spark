@@ -11,6 +11,6 @@ public interface IUserService extends Service<UserLedDTO> {
 	
 	public List<UserLedDTO> getUsers();
 
-	public Optional<UserLedDTO> getUser(String username);
+	public Optional<UserLedDTO> get(String username);
 	
 }

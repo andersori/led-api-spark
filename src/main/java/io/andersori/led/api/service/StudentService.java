@@ -28,8 +28,8 @@ public class StudentService implements IStudentService {
         return studentRepository.findAll()
         .stream()
         .map((Student s) -> {
-            StudentDTO bean = new StudentDTO();
-            return bean.toDto(s);
+            StudentDTO dto = new StudentDTO();
+            return dto.toDto(s);
         })
         .collect(Collectors.toList());
 	}

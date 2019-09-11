@@ -28,8 +28,8 @@ public class CourseService implements ICourseService {
         return courseReposiroty.findAll()
         .stream()
         .map((Course c) -> {
-            CourseDTO bean = new CourseDTO();
-            return bean.toDto(c);
+            CourseDTO dto = new CourseDTO();
+            return dto.toDto(c);
         })
         .collect(Collectors.toList());
 	}

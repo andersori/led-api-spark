@@ -5,7 +5,6 @@ import org.modelmapper.ModelMapper;
 public abstract class DTO<Source, Destination> {
 
     private Class<Source> sourceType;
-
     private Class<Destination> destinationType;
 
     public DTO(Class<Source> sourceType, Class<Destination> destinationType){

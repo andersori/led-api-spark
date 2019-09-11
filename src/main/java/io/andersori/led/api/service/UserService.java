@@ -29,8 +29,8 @@ public class UserService implements IUserService {
 		return userRepository.findAll()
 		.stream()
 		.map((UserLed u) -> {
-			UserLedDTO bean = new UserLedDTO();
-			return bean.toDto(u);
+			UserLedDTO dto = new UserLedDTO();
+			return dto.toDto(u);
 		})
 		.collect(Collectors.toList());
 	}
@@ -38,21 +38,19 @@ public class UserService implements IUserService {
 	@Override
 	public Optional<UserLedDTO> get(Long id) {
 		Optional<UserLed> result = userRepository.get(id);
-		
 		if(result.isPresent()){
-			UserLedDTO bean = new UserLedDTO();
-			return Optional.of(bean.toDto(result.get()));
+			UserLedDTO dto = new UserLedDTO();
+			return Optional.of(dto.toDto(result.get()));
 		}
-
 		return Optional.empty();
 	}
 
 	@Override
-	public Optional<UserLedDTO> getUser(String username) {
+	public Optional<UserLedDTO> get(String username) {
 		Optional<UserLed> user = userRepository.findByUsername(username);
 		if(user.isPresent()){
-			UserLedDTO bean = new UserLedDTO();
-			return Optional.of(bean.toDto(user.get()));
+			UserLedDTO dto = new UserLedDTO();
+			return Optional.of(dto.toDto(user.get()));
 		}
 		return Optional.empty();
 	}

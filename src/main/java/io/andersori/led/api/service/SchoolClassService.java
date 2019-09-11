@@ -29,8 +29,8 @@ public class SchoolClassService implements ISchoolClassService {
         return schoolClassRepository.findAll()
         .stream()
         .map((SchoolClass s) -> {
-            SchoolClassDTO bean = new SchoolClassDTO();
-            return bean.toDto(s);
+            SchoolClassDTO dto = new SchoolClassDTO();
+            return dto.toDto(s);
         })
         .collect(Collectors.toList());
 	}
