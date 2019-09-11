@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.andersori.led.api.entity.Semester;
 
 @JsonIgnoreProperties({})
-public class SemesterDto extends Dto<Semester, SemesterDto> {
+public class SemesterDTO extends DTO<Semester, SemesterDTO> {
 
     @JsonProperty("year")
     private Integer year;
@@ -14,12 +14,12 @@ public class SemesterDto extends Dto<Semester, SemesterDto> {
     @JsonProperty("numberSemester")
     private Integer numberSemester;
 
-    public SemesterDto(Class<Semester> sourceType, Class<SemesterDto> destinationType) {
+    public SemesterDTO(Class<Semester> sourceType, Class<SemesterDTO> destinationType) {
         super(sourceType, destinationType);
     }
 
-    public SemesterDto() {
-        this(Semester.class, SemesterDto.class);
+    public SemesterDTO() {
+        this(Semester.class, SemesterDTO.class);
     }
 
     public Integer getYear() {

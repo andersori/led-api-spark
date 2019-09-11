@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import io.andersori.led.api.dto.SchoolClassDto;
+import io.andersori.led.api.dto.SchoolClassDTO;
 import io.andersori.led.api.entity.SchoolClass;
 import io.andersori.led.api.repository.SchoolClassRepositoryIn;
 
@@ -20,16 +20,16 @@ public class SchoolClassService implements ISchoolClassService {
     private SchoolClassRepositoryIn schoolClassRepository;
 
     @Override
-    public void register(SchoolClassDto schoolClass) {
+    public void register(SchoolClassDTO schoolClass) {
         schoolClassRepository.save(schoolClass.toEntity(schoolClass));
     }
 
 	@Override
-	public List<SchoolClassDto> getSchoolClasses() {
+	public List<SchoolClassDTO> getSchoolClasses() {
         return schoolClassRepository.findAll()
         .stream()
         .map((SchoolClass s) -> {
-            SchoolClassDto bean = new SchoolClassDto();
+            SchoolClassDTO bean = new SchoolClassDTO();
             return bean.toDto(s);
         })
         .collect(Collectors.toList());

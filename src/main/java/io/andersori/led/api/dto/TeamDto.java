@@ -9,25 +9,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.andersori.led.api.entity.Team;
 
 @JsonIgnoreProperties({})
-public class TeamDto extends Dto<Team, TeamDto> {
+public class TeamDTO extends DTO<Team, TeamDTO> {
 
     @JsonProperty("id")
     private Long id;
 
     @JsonProperty("user")
-    private UserLedDto user;
+    private UserLedDTO user;
 
     @JsonProperty("students")
-    private List<StudentDto> students = new ArrayList<>();
+    private List<StudentDTO> students = new ArrayList<>();
 
     @JsonProperty("participations")
-    private List<ParticipantTeamDto> participations = new ArrayList<>();
+    private List<ParticipantTeamDTO> participations = new ArrayList<>();
 
-    public TeamDto(Class<Team> sourceType, Class<TeamDto> destinationType) {
+    public TeamDTO(Class<Team> sourceType, Class<TeamDTO> destinationType) {
         super(sourceType, destinationType);
     }
-    public TeamDto() {
-        this(Team.class, TeamDto.class);
+    public TeamDTO() {
+        this(Team.class, TeamDTO.class);
     }
 
     public Long getId() {
@@ -38,27 +38,27 @@ public class TeamDto extends Dto<Team, TeamDto> {
         this.id = id;
     }
 
-    public UserLedDto getUser() {
+    public UserLedDTO getUser() {
         return this.user;
     }
 
-    public void setUser(UserLedDto user) {
+    public void setUser(UserLedDTO user) {
         this.user = user;
     }
 
-    public List<StudentDto> getStudents() {
+    public List<StudentDTO> getStudents() {
         return this.students;
     }
 
-    public void setStudents(List<StudentDto> students) {
+    public void setStudents(List<StudentDTO> students) {
         this.students = students;
     }
 
-    public List<ParticipantTeamDto> getParticipations() {
+    public List<ParticipantTeamDTO> getParticipations() {
         return this.participations;
     }
 
-    public void setParticipations(List<ParticipantTeamDto> participations) {
+    public void setParticipations(List<ParticipantTeamDTO> participations) {
         this.participations = participations;
     }
     

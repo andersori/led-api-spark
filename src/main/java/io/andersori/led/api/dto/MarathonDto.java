@@ -10,26 +10,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.andersori.led.api.entity.Marathon;
 
 @JsonIgnoreProperties({})
-public class MarathonDto extends Dto<Marathon, MarathonDto> {
+public class MarathonDTO extends DTO<Marathon, MarathonDTO> {
 
     @JsonProperty("id")
     private Long id;
 
     @JsonProperty("semester")
-    private SemesterDto semester;
+    private SemesterDTO semester;
 
     @JsonProperty("date")
     private LocalDate date;
 
     @JsonProperty("participants")
-    private List<ParticipantTeamDto> participants = new ArrayList<>();
+    private List<ParticipantTeamDTO> participants = new ArrayList<>();
 
-    public MarathonDto(Class<Marathon> sourceType, Class<MarathonDto> destinationType) {
+    public MarathonDTO(Class<Marathon> sourceType, Class<MarathonDTO> destinationType) {
         super(sourceType, destinationType);
     }
 
-    public MarathonDto() {
-        this(Marathon.class, MarathonDto.class);
+    public MarathonDTO() {
+        this(Marathon.class, MarathonDTO.class);
     }
 
     public Long getId() {
@@ -40,11 +40,11 @@ public class MarathonDto extends Dto<Marathon, MarathonDto> {
         this.id = id;
     }
 
-    public SemesterDto getSemester() {
+    public SemesterDTO getSemester() {
         return this.semester;
     }
 
-    public void setSemester(SemesterDto semester) {
+    public void setSemester(SemesterDTO semester) {
         this.semester = semester;
     }
 
@@ -56,11 +56,11 @@ public class MarathonDto extends Dto<Marathon, MarathonDto> {
         this.date = date;
     }
 
-    public List<ParticipantTeamDto> getParticipants() {
+    public List<ParticipantTeamDTO> getParticipants() {
         return this.participants;
     }
 
-    public void setParticipants(List<ParticipantTeamDto> participants) {
+    public void setParticipants(List<ParticipantTeamDTO> participants) {
         this.participants = participants;
     }
 

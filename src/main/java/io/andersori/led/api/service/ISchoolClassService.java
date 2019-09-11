@@ -2,12 +2,12 @@ package io.andersori.led.api.service;
 
 import java.util.List;
 
-import io.andersori.led.api.dto.SchoolClassDto;
+import io.andersori.led.api.dto.SchoolClassDTO;
 
 public interface ISchoolClassService {
 
-    public void register(SchoolClassDto schoolClass);
+    public void register(SchoolClassDTO schoolClass);
 
-    public List<SchoolClassDto> getSchoolClasses();
+    public List<SchoolClassDTO> getSchoolClasses();
 
 }

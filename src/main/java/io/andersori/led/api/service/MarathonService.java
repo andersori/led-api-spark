@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import io.andersori.led.api.dto.MarathonDto;
+import io.andersori.led.api.dto.MarathonDTO;
 import io.andersori.led.api.entity.Marathon;
 import io.andersori.led.api.repository.MarathonRepositoryIn;
 
@@ -20,27 +20,27 @@ public class MarathonService implements IMarathonService {
     private MarathonRepositoryIn marathonRepository;
 
     @Override
-    public void register(MarathonDto marathon) {
+    public void register(MarathonDTO marathon) {
         marathonRepository.save(marathon.toEntity(marathon));
     }
 
 	@Override
-	public List<MarathonDto> getMarathons() {
+	public List<MarathonDTO> getMarathons() {
         return marathonRepository.findAll()
         .stream()
         .map((Marathon m) -> {
-            MarathonDto bean = new MarathonDto();
+            MarathonDTO bean = new MarathonDTO();
             return bean.toDto(m);
         })
         .collect(Collectors.toList());
 	}
 
     @Override
-    public Optional<MarathonDto> get(Long id) {
+    public Optional<MarathonDTO> get(Long id) {
         Optional<Marathon> result = marathonRepository.get(id);
 
         if(result.isPresent()){
-            MarathonDto bean = new MarathonDto();
+            MarathonDTO bean = new MarathonDTO();
             return Optional.of(bean.toDto(result.get()));
         }
 

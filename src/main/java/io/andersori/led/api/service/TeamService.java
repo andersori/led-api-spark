@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import io.andersori.led.api.dto.TeamDto;
+import io.andersori.led.api.dto.TeamDTO;
 import io.andersori.led.api.entity.Team;
 import io.andersori.led.api.repository.TeamRepositoryIn;
 
@@ -20,27 +20,27 @@ public class TeamService implements ITeamService {
     private TeamRepositoryIn teamRepository;
 
     @Override
-    public void register(TeamDto team) {
+    public void register(TeamDTO team) {
         teamRepository.save(team.toEntity(team));
     }
 
 	@Override
-	public List<TeamDto> getTeams() {
+	public List<TeamDTO> getTeams() {
         return teamRepository.findAll()
         .stream()
         .map((Team e) -> {
-            TeamDto bean = new TeamDto();
+            TeamDTO bean = new TeamDTO();
             return bean.toDto(e);
         })
         .collect(Collectors.toList());
 	}
 
     @Override
-    public Optional<TeamDto> get(Long id) {
+    public Optional<TeamDTO> get(Long id) {
         Optional<Team> result = teamRepository.get(id);
         
         if(result.isPresent()){
-            TeamDto bean = new TeamDto();
+            TeamDTO bean = new TeamDTO();
             return Optional.of(bean.toDto(result.get()));
         }
 

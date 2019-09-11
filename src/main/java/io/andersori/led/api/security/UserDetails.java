@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import io.andersori.led.api.dto.UserLedDto;
+import io.andersori.led.api.dto.UserLedDTO;
 import io.andersori.led.api.service.IUserService;
 
 @Component
@@ -18,9 +18,9 @@ public class UserDetails {
     private IUserService userService;
 
     public Optional<User> loadUserByUsername(String username) {
-        Optional<UserLedDto> result = userService.getUser(username);
+        Optional<UserLedDTO> result = userService.getUser(username);
         if(result.isPresent()){
-            UserLedDto bean = result.get();
+            UserLedDTO bean = result.get();
             User user = new User(bean.getUsername(), bean.getPassword(), new ArrayList<>(bean.getRoles()));
             return Optional.of(user);
         }

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.andersori.led.api.entity.Course;
 
 @JsonIgnoreProperties({})
-public class CourseDto extends Dto<Course, CourseDto> {
+public class CourseDTO extends DTO<Course, CourseDTO> {
 
     @JsonProperty("id")
     private Long id;
@@ -18,17 +18,17 @@ public class CourseDto extends Dto<Course, CourseDto> {
     private String name;
     
     @JsonProperty("students")
-    private List<StudentDto> students = new ArrayList<>();
+    private List<StudentDTO> students = new ArrayList<>();
 
     @JsonProperty("schoolClasses")
-    private List<SchoolClassDto> schoolClasses = new ArrayList<>();
+    private List<SchoolClassDTO> schoolClasses = new ArrayList<>();
 
-    public CourseDto(Class<Course> sourceType, Class<CourseDto> destinationType) {
+    public CourseDTO(Class<Course> sourceType, Class<CourseDTO> destinationType) {
         super(sourceType, destinationType);
     }
 
-    public CourseDto() {
-        this(Course.class, CourseDto.class);
+    public CourseDTO() {
+        this(Course.class, CourseDTO.class);
     }
 
     public Long getId() {
@@ -47,19 +47,19 @@ public class CourseDto extends Dto<Course, CourseDto> {
         this.name = name;
     }
 
-    public List<StudentDto> getStudents() {
+    public List<StudentDTO> getStudents() {
         return this.students;
     }
 
-    public void setStudents(List<StudentDto> students) {
+    public void setStudents(List<StudentDTO> students) {
         this.students = students;
     }
 
-    public List<SchoolClassDto> getSchoolClasses() {
+    public List<SchoolClassDTO> getSchoolClasses() {
         return this.schoolClasses;
     }
 
-    public void setSchoolClasses(List<SchoolClassDto> schoolClasses) {
+    public void setSchoolClasses(List<SchoolClassDTO> schoolClasses) {
         this.schoolClasses = schoolClasses;
     }
     

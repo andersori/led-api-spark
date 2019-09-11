@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import io.andersori.led.api.dto.CourseDto;
+import io.andersori.led.api.dto.CourseDTO;
 import io.andersori.led.api.entity.Course;
 import io.andersori.led.api.repository.CourseRepositoryIn;
 
@@ -19,16 +19,16 @@ public class CourseService implements ICourseService {
     private CourseRepositoryIn courseReposiroty;
 
     @Override
-    public void register(CourseDto course) {
+    public void register(CourseDTO course) {
         courseReposiroty.save(course.toEntity(course));
     }
 
 	@Override
-	public List<CourseDto> getCouses() {
+	public List<CourseDTO> getCouses() {
         return courseReposiroty.findAll()
         .stream()
         .map((Course c) -> {
-            CourseDto bean = new CourseDto();
+            CourseDTO bean = new CourseDTO();
             return bean.toDto(c);
         })
         .collect(Collectors.toList());

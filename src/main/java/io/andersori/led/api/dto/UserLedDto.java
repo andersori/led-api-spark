@@ -12,7 +12,7 @@ import io.andersori.led.api.entity.RoleLed;
 import io.andersori.led.api.entity.UserLed;
 
 @JsonIgnoreProperties({})
-public class UserLedDto extends Dto<UserLed, UserLedDto> {
+public class UserLedDTO extends DTO<UserLed, UserLedDTO> {
 	
 	@JsonProperty("id")
 	private Long id;
@@ -32,12 +32,12 @@ public class UserLedDto extends Dto<UserLed, UserLedDto> {
 	@JsonProperty("roles")
 	private Set<RoleLed> roles = new HashSet<RoleLed>(Arrays.asList(RoleLed.NONE));;
 	
-	public UserLedDto(Class<UserLed> sourceType, Class<UserLedDto> destinationType) {
+	public UserLedDTO(Class<UserLed> sourceType, Class<UserLedDTO> destinationType) {
 		super(sourceType, destinationType);
 	}
 
-	public UserLedDto() {
-		this(UserLed.class, UserLedDto.class);
+	public UserLedDTO() {
+		this(UserLed.class, UserLedDTO.class);
 	}
 
 	public Long getId() {

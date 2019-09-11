@@ -3,14 +3,14 @@ package io.andersori.led.api.service;
 import java.util.List;
 import java.util.Optional;
 
-import io.andersori.led.api.dto.UserLedDto;
+import io.andersori.led.api.dto.UserLedDTO;
 
-public interface IUserService extends Service<UserLedDto> {
+public interface IUserService extends Service<UserLedDTO> {
 	
-	public void register(UserLedDto user);
+	public void register(UserLedDTO user);
 	
-	public List<UserLedDto> getUsers();
+	public List<UserLedDTO> getUsers();
 
-	public Optional<UserLedDto> getUser(String username);
+	public Optional<UserLedDTO> getUser(String username);
 	
 }

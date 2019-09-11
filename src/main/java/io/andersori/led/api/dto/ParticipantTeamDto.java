@@ -9,13 +9,13 @@ import io.andersori.led.api.entity.House;
 import io.andersori.led.api.entity.ParticipantTeam;
 
 @JsonIgnoreProperties({})
-public class ParticipantTeamDto extends Dto<ParticipantTeam, ParticipantTeamDto> {
+public class ParticipantTeamDTO extends DTO<ParticipantTeam, ParticipantTeamDTO> {
 
     @JsonProperty("id")
     private Long id;
 
     @JsonProperty("team")
-    private TeamDto team;
+    private TeamDTO team;
 
     @JsonProperty("score")
     private Integer score = 0;
@@ -27,14 +27,14 @@ public class ParticipantTeamDto extends Dto<ParticipantTeam, ParticipantTeamDto>
     private House house = House.UNDEFINED;
 
     @JsonProperty("marathon")
-    private MarathonDto marathon;
+    private MarathonDTO marathon;
 
-    public ParticipantTeamDto(Class<ParticipantTeam> sourceType, Class<ParticipantTeamDto> destinationType) {
+    public ParticipantTeamDTO(Class<ParticipantTeam> sourceType, Class<ParticipantTeamDTO> destinationType) {
         super(sourceType, destinationType);
     }
 
-    public ParticipantTeamDto() {
-        this(ParticipantTeam.class, ParticipantTeamDto.class);
+    public ParticipantTeamDTO() {
+        this(ParticipantTeam.class, ParticipantTeamDTO.class);
     }
 
     public Long getId() {
@@ -45,11 +45,11 @@ public class ParticipantTeamDto extends Dto<ParticipantTeam, ParticipantTeamDto>
         this.id = id;
     }
 
-    public TeamDto getTeam() {
+    public TeamDTO getTeam() {
         return this.team;
     }
 
-    public void setTeam(TeamDto team) {
+    public void setTeam(TeamDTO team) {
         this.team = team;
     }
 
@@ -77,11 +77,11 @@ public class ParticipantTeamDto extends Dto<ParticipantTeam, ParticipantTeamDto>
         this.house = house;
     }
 
-    public MarathonDto getMarathon() {
+    public MarathonDTO getMarathon() {
         return this.marathon;
     }
 
-    public void setMarathon(MarathonDto marathon) {
+    public void setMarathon(MarathonDTO marathon) {
         this.marathon = marathon;
     }
 

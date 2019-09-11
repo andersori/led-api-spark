@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.andersori.led.api.entity.SchoolClass;
 
 @JsonIgnoreProperties({})
-public class SchoolClassDto extends Dto<SchoolClass, SchoolClassDto> {
+public class SchoolClassDTO extends DTO<SchoolClass, SchoolClassDTO> {
 
     @JsonProperty("id")
     private Long id;
@@ -21,20 +21,20 @@ public class SchoolClassDto extends Dto<SchoolClass, SchoolClassDto> {
     private String codClass;
 
     @JsonProperty("semester")
-    private SemesterDto semester;
+    private SemesterDTO semester;
 
     @JsonProperty("course")
-    private CourseDto course;
+    private CourseDTO course;
 
     @JsonProperty("students")
-    private List<StudentDto> students = new ArrayList<>();
+    private List<StudentDTO> students = new ArrayList<>();
 
-    public SchoolClassDto(Class<SchoolClass> sourceType, Class<SchoolClassDto> destinationType) {
+    public SchoolClassDTO(Class<SchoolClass> sourceType, Class<SchoolClassDTO> destinationType) {
         super(sourceType, destinationType);
     }
 
-    public SchoolClassDto(){
-        this(SchoolClass.class, SchoolClassDto.class);
+    public SchoolClassDTO(){
+        this(SchoolClass.class, SchoolClassDTO.class);
     }
 
     public Long getId() {
@@ -61,27 +61,27 @@ public class SchoolClassDto extends Dto<SchoolClass, SchoolClassDto> {
         this.codClass = codClass;
     }
 
-    public SemesterDto getSemester() {
+    public SemesterDTO getSemester() {
         return this.semester;
     }
 
-    public void setSemester(SemesterDto semester) {
+    public void setSemester(SemesterDTO semester) {
         this.semester = semester;
     }
 
-    public CourseDto getCourse() {
+    public CourseDTO getCourse() {
         return this.course;
     }
 
-    public void setCourse(CourseDto course) {
+    public void setCourse(CourseDTO course) {
         this.course = course;
     }
 
-    public List<StudentDto> getStudents() {
+    public List<StudentDTO> getStudents() {
         return this.students;
     }
 
-    public void setStudents(List<StudentDto> students) {
+    public void setStudents(List<StudentDTO> students) {
         this.students = students;
     }
 

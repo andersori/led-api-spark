@@ -2,12 +2,12 @@ package io.andersori.led.api.service;
 
 import java.util.List;
 
-import io.andersori.led.api.dto.CourseDto;
+import io.andersori.led.api.dto.CourseDTO;
 
 public interface ICourseService {
 
-    public void register(CourseDto course);
+    public void register(CourseDTO course);
 
-    public List<CourseDto> getCouses();
+    public List<CourseDTO> getCouses();
 
 }

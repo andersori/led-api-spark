@@ -9,11 +9,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import io.andersori.led.api.dto.MarathonDto;
-import io.andersori.led.api.dto.ParticipantTeamDto;
-import io.andersori.led.api.dto.SemesterDto;
-import io.andersori.led.api.dto.TeamDto;
-import io.andersori.led.api.dto.UserLedDto;
+import io.andersori.led.api.dto.MarathonDTO;
+import io.andersori.led.api.dto.ParticipantTeamDTO;
+import io.andersori.led.api.dto.SemesterDTO;
+import io.andersori.led.api.dto.TeamDTO;
+import io.andersori.led.api.dto.UserLedDTO;
 import io.andersori.led.api.entity.RoleLed;
 import io.andersori.led.api.service.IMarathonService;
 import io.andersori.led.api.service.IParticipantTeamService;
@@ -52,25 +52,25 @@ public class App {
 	private static void userRegister() {
 		IUserService ser = BeanUtil.getBean(UserService.class);
 		
-		UserLedDto bean = new UserLedDto();
+		UserLedDTO bean = new UserLedDTO();
 		bean.setName("Soriano");
 		bean.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
 		bean.setUsername("andersori");
 		bean.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.ADMIN, RoleLed.STUDENT)));
 
-		UserLedDto bean1 = new UserLedDto();
+		UserLedDTO bean1 = new UserLedDTO();
 		bean1.setName("Equipe_1");
 		bean1.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
 		bean1.setUsername("team1");
 		bean1.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
 
-		UserLedDto bean2 = new UserLedDto();
+		UserLedDTO bean2 = new UserLedDTO();
 		bean2.setName("Equipe_2");
 		bean2.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
 		bean2.setUsername("team2");
 		bean2.setRoles(new HashSet<RoleLed>(Arrays.asList(RoleLed.STUDENT)));
 
-		UserLedDto bean3 = new UserLedDto();
+		UserLedDTO bean3 = new UserLedDTO();
 		bean3.setName("Equipe_3");
 		bean3.setPassword(BCrypt.hashpw("1234", BCrypt.gensalt()));
 		bean3.setUsername("team3");
@@ -87,7 +87,7 @@ public class App {
 		IUserService serUsers = BeanUtil.getBean(UserService.class);
 		ITeamService serTeam = BeanUtil.getBean(TeamService.class);
 
-		TeamDto bean2 = new TeamDto();
+		TeamDTO bean2 = new TeamDTO();
 		bean2.setUser(serUsers.get(2L).get());
 
 		serTeam.register(bean2);
@@ -95,10 +95,10 @@ public class App {
 
 	
 	public static void createMarathon() {
-		MarathonDto mar1 = new MarathonDto();
-		MarathonDto mar2 = new MarathonDto();
+		MarathonDTO mar1 = new MarathonDTO();
+		MarathonDTO mar2 = new MarathonDTO();
 
-		SemesterDto ses = new SemesterDto();
+		SemesterDTO ses = new SemesterDTO();
 		ses.setNumberSemester(2);
 		ses.setYear(2019);
 
@@ -119,10 +119,10 @@ public class App {
 		IMarathonService marService = BeanUtil.getBean(MarathonService.class);
 		ITeamService teamService = BeanUtil.getBean(TeamService.class);
 
-		MarathonDto marBean = marService.get(1L).get();
-		TeamDto teamBean = teamService.get(1L).get();
+		MarathonDTO marBean = marService.get(1L).get();
+		TeamDTO teamBean = teamService.get(1L).get();
 
-		ParticipantTeamDto part1 = new ParticipantTeamDto();
+		ParticipantTeamDTO part1 = new ParticipantTeamDTO();
 		part1.setMarathon(marBean);
 		part1.setTeam(teamBean);
 

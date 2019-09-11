@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.andersori.led.api.entity.Student;
 
 @JsonIgnoreProperties({})
-public class StudentDto extends Dto<Student, StudentDto> {
+public class StudentDTO extends DTO<Student, StudentDTO> {
 
     @JsonProperty("id")
     private Long id;
@@ -18,17 +18,17 @@ public class StudentDto extends Dto<Student, StudentDto> {
     private Long registration;
 
     @JsonProperty("course")
-    private CourseDto course;
+    private CourseDTO course;
 
     @JsonProperty("schoolClass")
-    private SchoolClassDto schoolClass;
+    private SchoolClassDTO schoolClass;
 
-    public StudentDto(Class<Student> sourceType, Class<StudentDto> destinationType) {
+    public StudentDTO(Class<Student> sourceType, Class<StudentDTO> destinationType) {
         super(sourceType, destinationType);
     }
 
-    public StudentDto() {
-        this(Student.class, StudentDto.class);
+    public StudentDTO() {
+        this(Student.class, StudentDTO.class);
     }
 
     public Long getId() {
@@ -55,19 +55,19 @@ public class StudentDto extends Dto<Student, StudentDto> {
         this.registration = registration;
     }
 
-    public CourseDto getCourse() {
+    public CourseDTO getCourse() {
         return this.course;
     }
 
-    public void setCourse(CourseDto course) {
+    public void setCourse(CourseDTO course) {
         this.course = course;
     }
 
-    public SchoolClassDto getSchoolClass() {
+    public SchoolClassDTO getSchoolClass() {
         return this.schoolClass;
     }
 
-    public void setSchoolClass(SchoolClassDto schoolClass) {
+    public void setSchoolClass(SchoolClassDTO schoolClass) {
         this.schoolClass = schoolClass;
     }
     

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import io.andersori.led.api.dto.SemesterDto;
+import io.andersori.led.api.dto.SemesterDTO;
 import io.andersori.led.api.entity.Semester;
 import io.andersori.led.api.repository.SemesterRepositoryIn;
 
@@ -19,16 +19,16 @@ public class SemesterService implements ISemesterService {
     private SemesterRepositoryIn semesterRepository;
 
     @Override
-    public void register(SemesterDto semester) {
+    public void register(SemesterDTO semester) {
         semesterRepository.save(semester.toEntity(semester));
     }
 
 	@Override
-	public List<SemesterDto> getSemesters() {
+	public List<SemesterDTO> getSemesters() {
         return semesterRepository.findAll()
         .stream()
         .map((Semester s) -> {
-            SemesterDto bean = new SemesterDto();
+            SemesterDTO bean = new SemesterDTO();
             return bean.toDto(s);
         })
         .collect(Collectors.toList());

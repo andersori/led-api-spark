@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import io.andersori.led.api.dto.UserLedDto;
+import io.andersori.led.api.dto.UserLedDTO;
 import io.andersori.led.api.entity.UserLed;
 import io.andersori.led.api.repository.UserRepositoryIn;
 
@@ -20,27 +20,27 @@ public class UserService implements IUserService {
 	private UserRepositoryIn userRepository;
 
 	@Override
-	public void register(UserLedDto user) {
+	public void register(UserLedDTO user) {
 		userRepository.save(user.toEntity(user));
 	}
 
 	@Override
-	public List<UserLedDto> getUsers() {
+	public List<UserLedDTO> getUsers() {
 		return userRepository.findAll()
 		.stream()
 		.map((UserLed u) -> {
-			UserLedDto bean = new UserLedDto();
+			UserLedDTO bean = new UserLedDTO();
 			return bean.toDto(u);
 		})
 		.collect(Collectors.toList());
 	}
 
 	@Override
-	public Optional<UserLedDto> get(Long id) {
+	public Optional<UserLedDTO> get(Long id) {
 		Optional<UserLed> result = userRepository.get(id);
 		
 		if(result.isPresent()){
-			UserLedDto bean = new UserLedDto();
+			UserLedDTO bean = new UserLedDTO();
 			return Optional.of(bean.toDto(result.get()));
 		}
 
@@ -48,10 +48,10 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public Optional<UserLedDto> getUser(String username) {
+	public Optional<UserLedDTO> getUser(String username) {
 		Optional<UserLed> user = userRepository.findByUsername(username);
 		if(user.isPresent()){
-			UserLedDto bean = new UserLedDto();
+			UserLedDTO bean = new UserLedDTO();
 			return Optional.of(bean.toDto(user.get()));
 		}
 		return Optional.empty();

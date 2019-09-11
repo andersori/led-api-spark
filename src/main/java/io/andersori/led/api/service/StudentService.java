@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import io.andersori.led.api.dto.StudentDto;
+import io.andersori.led.api.dto.StudentDTO;
 import io.andersori.led.api.entity.Student;
 import io.andersori.led.api.repository.StudentRepositoryIn;
 
@@ -19,16 +19,16 @@ public class StudentService implements IStudentService {
     private StudentRepositoryIn studentRepository;
 
     @Override
-    public void register(StudentDto student) {
+    public void register(StudentDTO student) {
         studentRepository.save(student.toEntity(student));
     }
 
 	@Override
-	public List<StudentDto> getStudents() {
+	public List<StudentDTO> getStudents() {
         return studentRepository.findAll()
         .stream()
         .map((Student s) -> {
-            StudentDto bean = new StudentDto();
+            StudentDTO bean = new StudentDTO();
             return bean.toDto(s);
         })
         .collect(Collectors.toList());
