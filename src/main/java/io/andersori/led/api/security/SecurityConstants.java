@@ -6,6 +6,6 @@ public abstract class SecurityConstants {
     public static final String SECRET = "1234";
     public static final String HEADER_STRING = "Authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
-    public static final String PROTECTED_PATH = "/protected";
+    public static final String PROTECTED_PATH_PREFIX = "/protected";
 
 }

@@ -4,20 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
+import io.andersori.led.api.security.PrivatePath;
 import io.andersori.led.api.service.ISemesterService;
 import io.andersori.led.api.util.JsonTransformer;
 import spark.Spark;
 
 @Controller
-public class SemesterController {
+public class SemesterController extends PrivatePath {
 
     @Autowired
     @Qualifier("SemesterService")
     private ISemesterService semesterService;
 
     public SemesterController() {
-
-        Spark.get("/semesters", (req, res) -> {
+    	super("/semesters");
+    	
+        Spark.get(getPath(), (req, res) -> {
             return semesterService.getSemesters();
         }, new JsonTransformer());
         
